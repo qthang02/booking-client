@@ -1,5 +1,8 @@
 import {Avatar, Button, DatePicker, Dropdown, Input, MenuProps, Space} from "antd";
 import {MenuOutlined, SearchOutlined, UserOutlined} from "@ant-design/icons";
+import { Navigate, NavigateFunction, useNavigate } from "react-router-dom";
+
+let navigation: NavigateFunction | ((arg0: string) => void);
 
 const items: MenuProps["items"] = [
     {
@@ -25,7 +28,8 @@ const items: MenuProps["items"] = [
             >
                 Đăng nhập
             </span>
-        )
+        ),
+        onClick: () => navigation("/login")
     },
     {
         key: "3",
@@ -138,6 +142,8 @@ const itemOptionMenu: MenuProps["items"] = [
 ]
 
 export const Header = () => {
+    navigation = useNavigate();
+
     return (
         <Space
             style={{
