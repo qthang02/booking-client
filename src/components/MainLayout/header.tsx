@@ -16,7 +16,8 @@ const items: MenuProps["items"] = [
             >
                 Đăng ký
             </span>
-        )
+        ),
+        onClick: () => navigation("/register")
     },
     {
         key: "2",
