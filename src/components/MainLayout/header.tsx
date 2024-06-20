@@ -1,149 +1,166 @@
 import {Avatar, Button, DatePicker, Dropdown, Input, MenuProps, Space} from "antd";
 import {MenuOutlined, SearchOutlined, UserOutlined} from "@ant-design/icons";
-import { Navigate, NavigateFunction, useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 let navigation: NavigateFunction | ((arg0: string) => void);
 
-const items: MenuProps["items"] = [
-    {
-        key: '1',
-        label: (
-            <span
-                style={{
-                    fontSize: "18px",
-                    fontWeight: "bolder"
-                }}
-            >
-                Đăng ký
-            </span>
-        ),
-        onClick: () => navigation("/register")
-    },
-    {
-        key: "2",
-        label: (
-            <span
-                style={{
-                    fontSize: "18px"
-                }}
-            >
-                Đăng nhập
-            </span>
-        ),
-        onClick: () => navigation("/login")
-    },
-    {
-        key: "3",
-        label: (
-            <span
-                style={{
-                    fontSize: "18px"
-                }}
-            >
-                Cho thuê chô ở qua Booking
-            </span>
-        )
-    }
-]
-
-const { RangePicker } = DatePicker;
-
-const itemOptionMenu: MenuProps["items"] = [
-    {
-        key: "1",
-        label: (
-            <div
-                style={{
-                    width: "400px",
-                    height: "200px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between"
-                }}
-            >
-                <div
-                    style={{
-                        fontSize: "20px",
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                        borderBottom: "gray 1px solid",
-                        padding: "15px 5px"
-                    }}
-                >
-                    <span>Người lớn</span>
-                    <span
-                        style={{
-                            width: "150px",
-                            height: "max-content",
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "space-between"
-                        }}
-                    >
-                            <Button>-</Button>
-                            <span>1</span>
-                            <Button>+</Button>
-                        </span>
-                </div>
-
-                <div
-                    style={{
-                        fontSize: "20px",
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                        borderBottom: "gray 1px solid",
-                        padding: "10px 5px"
-                    }}
-                >
-                    <span>Trẻ em</span>
-                    <span
-                        style={{
-                            width: "150px",
-                            height: "max-content",
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "space-between"
-                        }}
-                    >
-                            <Button>-</Button>
-                            <span>1</span>
-                            <Button>+</Button>
-                        </span>
-                </div>
-
-                <div
-                    style={{
-                        fontSize: "20px",
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                        padding: "10px 5px"
-                    }}
-                >
-                    <span>Phòng</span>
-                    <span
-                        style={{
-                            width: "150px",
-                            height: "max-content",
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "space-between"
-                        }}
-                    >
-                            <Button>-</Button>
-                            <span>1</span>
-                            <Button>+</Button>
-                        </span>
-                </div>
-            </div>
-        )
-    }
-]
 
 export const Header = () => {
     navigation = useNavigate();
+    const items: MenuProps["items"] = [
+        {
+            key: "4",
+            label: (
+                <span
+                    style={{
+                        fontSize: "18px",
+                        fontWeight: "bolder"
+                    }}
+                >
+                   Trang chủ
+                </span>
+            ),
+            onClick: () => navigation("/")
+        },
+        
+        {
+            key: '1',
+            label: (
+                <span
+                    style={{
+                        fontSize: "18px",
+                        fontWeight: "bolder"
+                    }}
+                >
+                    Đăng ký
+                </span>
+            ),
+            onClick: () => navigation("/register")
+        },
+        {
+            key: "2",
+            label: (
+                <span
+                    style={{
+                        fontSize: "18px",
+                        fontWeight: "bolder"
+                    }}
+                >
+                    Đăng nhập
+                </span>
+            ),
+            onClick: () => navigation("/login")
+        },
+        {
+            key: "3",
+            label: (
+                <span
+                    style={{
+                        fontSize: "18px",
+                        fontWeight: "bolder"
+                    }}
+                >
+                    Dịch vụ thuê phòng
+                </span>
+            )
+        }
+    ]
+    
+    const { RangePicker } = DatePicker;
+    
+    const itemOptionMenu: MenuProps["items"] = [
+        {
+            key: "1",
+            label: (
+                <div
+                    style={{
+                        width: "400px",
+                        height: "200px",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between"
+                    }}
+                >
+                    <div
+                        style={{
+                            fontSize: "20px",
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-around",
+                            borderBottom: "gray 1px solid",
+                            padding: "15px 5px"
+                        }}
+                    >
+                        <span>Người lớn</span>
+                        <span
+                            style={{
+                                width: "150px",
+                                height: "max-content",
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "space-between"
+                            }}
+                        >
+                                <Button>-</Button>
+                                <span>1</span>
+                                <Button>+</Button>
+                            </span>
+                    </div>
+    
+                    <div
+                        style={{
+                            fontSize: "20px",
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-around",
+                            borderBottom: "gray 1px solid",
+                            padding: "10px 5px"
+                        }}
+                    >
+                        <span>Trẻ em</span>
+                        <span
+                            style={{
+                                width: "150px",
+                                height: "max-content",
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "space-between"
+                            }}
+                        >
+                                <Button>-</Button>
+                                <span>1</span>
+                                <Button>+</Button>
+                            </span>
+                    </div>
+    
+                    <div
+                        style={{
+                            fontSize: "20px",
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-around",
+                            padding: "10px 5px"
+                        }}
+                    >
+                        <span>Phòng</span>
+                        <span
+                            style={{
+                                width: "150px",
+                                height: "max-content",
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "space-between"
+                            }}
+                        >
+                                <Button>-</Button>
+                                <span>1</span>
+                                <Button>+</Button>
+                            </span>
+                    </div>
+                </div>
+            )
+        }
+    ]
 
     return (
         <Space
@@ -163,7 +180,7 @@ export const Header = () => {
                     fontSize: "xx-large",
                 }}
             >
-                Booking
+                Shelby Hotel
             </span>
 
             {/*search box*/}

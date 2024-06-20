@@ -1,53 +1,113 @@
-import { Button, Checkbox, Form, Input, Space } from 'antd';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Form, Input, Space } from "antd";
 
-const Login = () => {
+import React from "react";
+
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 6 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 14 },
+  },
+};
+
+const tailFormItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 24,
+      offset: 0,
+    },
+    sm: {
+      span: 14,
+      offset: 6,
+    },
+  },
+};
+
+const Login: React.FC = () => {
+  const [form] = Form.useForm();
+
   const onFinish = () => {
-    console.log('sutmit ');
+    console.log("Received values of form: ");
   };
 
   return (
-    <Space>
-        <Form
-      name="normal_login"
-      className="login-form"
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+      }}
     >
-      <Form.Item
-        name="username"
-        rules={[{ required: true, message: 'Please input your Username!' }]}
-      >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        rules={[{ required: true, message: 'Please input your Password!' }]}
-      >
-        <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
-          type="password"
-          placeholder="Password"
-        />
-      </Form.Item>
-      <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
+      <Space direction="vertical" size="large">
+        <h1
+          style={{
+            textAlign: "center",
+            marginBottom: "20px",
+            color: "#3572EF",
+            fontWeight: "bold",
+            fontSize: "xx-large",
+          }}
+        >
+          Shelby Hotel
+        </h1>
+        <Form
+          {...formItemLayout}
+          form={form}
+          name="login"
+          onFinish={onFinish}
+          initialValues={{
+            residence: ["zhejiang", "hangzhou", "xihu"],
+            prefix: "86",
+          }}
+          style={{
+            width: 500,
+            padding: "20px",
+            borderRadius: "5px",
+          }}
+          scrollToFirstError
+        >
+          <Form.Item
+            name="email"
+            label="E-mail"
+            rules={[
+              {
+                type: "email",
+                message: "The input is not valid E-mail!",
+              },
+              {
+                required: true,
+                message: "Please input your E-mail!",
+              },
+            ]}
+          >
+            <Input size="large" />
+          </Form.Item>
 
-        <a className="login-form-forgot" href="">
-          Forgot password
-        </a>
-      </Form.Item>
+          <Form.Item
+            name="password"
+            label="Password"
+            rules={[
+              {
+                required: true,
+                message: "Please input your password!",
+              },
+            ]}
+          >
+            <Input.Password size="large" />
+          </Form.Item>
 
-      <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button">
-          Log in
-        </Button>
-        Or <a href="">register now!</a>
-      </Form.Item>
-    </Form>
-    </Space>
+          <Form.Item {...tailFormItemLayout} style={{ textAlign: "center" }}>
+            <Button type="primary" htmlType="submit" size="large">
+              Sign In
+            </Button>
+          </Form.Item>
+        </Form>
+      </Space>
+    </div>
   );
 };
 
