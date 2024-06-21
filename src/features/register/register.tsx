@@ -1,5 +1,6 @@
 import { Button, Checkbox, Form, Input, Select, Space } from "antd";
 
+import { Header } from "../../components/MainLayout/header";
 import React from "react";
 
 const { Option } = Select;
@@ -45,6 +46,8 @@ const Register: React.FC = () => {
   );
 
   return (
+    <div className="flex flex-col min-h-screen">
+    <Header />
     <div
       style={{
         display: "flex",
@@ -187,6 +190,7 @@ const Register: React.FC = () => {
           </Form.Item>
         </Form>
       </Space>
+    </div>
     </div>
   );
 };
