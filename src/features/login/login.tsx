@@ -1,5 +1,6 @@
 import { Button, Form, Input, Space } from "antd";
 
+import FooterClient from "../../components/MainLayout/footer";
 import { Header } from "../../components/MainLayout/header";
 import React from "react";
 
@@ -111,6 +112,7 @@ const Login: React.FC = () => {
           </Form>
         </Space>
       </div>
+      <FooterClient/>
     </div>
   );
 };

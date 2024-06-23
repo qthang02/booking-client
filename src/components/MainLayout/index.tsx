@@ -1,5 +1,7 @@
 import { Button, Carousel } from "antd";
 
+import Cskhbutton from "./CSKH.drawer.tsx";
+import FooterClient from "./footer.tsx";
 import { Header } from "./header.tsx";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -72,8 +74,10 @@ export const MainLayout = () => {
             justifyContent: "center",
             alignItems: "center",
             minHeight: "20vh",
+            gap:"10px"
           }}
         >
+             <Cskhbutton/>
           {/* Nút "Loại Phòng" với sự kiện onClick */}
           <Button size="large" type="primary" onClick={handleRoomButtonClick}>
             Loại Phòng
@@ -104,6 +108,7 @@ export const MainLayout = () => {
           </div>
         </Carousel>
       </>
+      <FooterClient/>
     </div>
   );
 };

@@ -43,7 +43,7 @@ const Booking: React.FC = () => {
           <Space>
             <Button onClick={onClose}>Cancel</Button>
             <Button onClick={onClose} type="primary">
-              Xác Nhận
+              Xác nhận
             </Button>
           </Space>
         }
@@ -70,8 +70,12 @@ const Booking: React.FC = () => {
                 ]}
               >
                 <Select placeholder="Please select a room type">
-                  <Option value="VIP">VIP</Option>
-                  <Option value="COMMON">Common</Option>
+                  <Option value="VIP">VIP 1</Option>
+                  <Option value="VIP">VIP 2</Option>
+                  <Option value="COMMON">Popular</Option>
+                  <Option value="VIP">Deluxe</Option>
+                  <Option value="COMMON">Separate Bed</Option>
+                  <Option value="COMMON">Original</Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -144,3 +148,5 @@ const Booking: React.FC = () => {
 };
 
 export default Booking;
+
+

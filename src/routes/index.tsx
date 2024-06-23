@@ -1,5 +1,6 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 
+import BookingHistory from "../features/booking history/bookinghistory";
 import Login from "../features/login/login";
 import { MainLayout } from "../components/MainLayout";
 import Register from "../features/register/register";
@@ -42,6 +43,14 @@ export const router = createBrowserRouter([
     path: "/rooms",
     element: <RoomList />,
   },
+  {
+    path: "/bookinghistory",
+    element: <BookingHistory />,
+  },
+//   {
+//     path: "/payment",
+//     element: <Payment />,
+//   },
   {
     path: "*",
     element: <div>404 Not Found</div>,

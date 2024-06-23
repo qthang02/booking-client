@@ -68,9 +68,10 @@ export const Header = () => {
             fontWeight: "bolder",
           }}
         >
-          Gia Hạn phòng
+          Lịch sử đặt phòng
         </span>
       ),
+      onClick: () => navigation("/bookinghistory"),
     },
   ];
 
@@ -210,7 +211,7 @@ export const Header = () => {
         >
           <Input
             size="large"
-            placeholder="Bạn muốn đi đâu ?"
+            placeholder="Search..."
             style={{
               width: "300px",
               height: "100%",
