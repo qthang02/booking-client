@@ -1,19 +1,21 @@
-import {
-  Button,
-  Col,
-  Drawer,
-  Form,
-  Input,
-  Row,
-  Select,
-  Space,
-} from "antd";
+import { Button, Col, Drawer, Form, Input, Row, Select, Space } from "antd";
 import React, { useState } from "react";
+
+import axios from "axios";
 
 const { Option } = Select;
 
+interface CustomerCareFormData {
+  username: string;
+  email: string;
+  oldmember: string;
+  otherservice: string;
+  description: string;
+}
+
 const Cskhbutton: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const [form] = Form.useForm<CustomerCareFormData>(); // Use form hook for form control
 
   const showDrawer = () => {
     setOpen(true);
@@ -21,6 +23,22 @@ const Cskhbutton: React.FC = () => {
 
   const onClose = () => {
     setOpen(false);
+    form.resetFields(); // Reset form fields on drawer close
+  };
+
+  const handleSubmit = async (values: CustomerCareFormData) => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/customercare", values);
+      console.log("Customer care submitted:", response.data);
+      setOpen(false); // Close the drawer after submission
+      form.resetFields(); // Reset form fields after submission
+      // Show success message
+      alert("Gửi thành công");
+    } catch (error) {
+      console.error("Error submitting customer care:", error);
+      // Handle error, e.g., show error message to user
+      alert("Đã có lỗi xảy ra. Vui lòng thử lại sau.");
+    }
   };
 
   return (
@@ -29,10 +47,10 @@ const Cskhbutton: React.FC = () => {
         Chăm sóc khách hàng
       </Button>
       <Drawer
-        title="Booking"
+        title="Chăm sóc khách hàng"
         width={720}
         onClose={onClose}
-        open={open}
+        visible={open}
         styles={{
           body: {
             paddingBottom: 80,
@@ -41,13 +59,23 @@ const Cskhbutton: React.FC = () => {
         extra={
           <Space>
             <Button onClick={onClose}>Cancel</Button>
-            <Button onClick={onClose} type="primary">
+            <Button
+              onClick={() => {
+                form.submit();
+              }}
+              type="primary"
+            >
               Gửi
             </Button>
           </Space>
         }
       >
-        <Form layout="vertical" hideRequiredMark>
+        <Form
+          form={form}
+          layout="vertical"
+          hideRequiredMark
+          onFinish={handleSubmit} // Use onFinish to handle form submission
+        >
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
@@ -94,7 +122,7 @@ const Cskhbutton: React.FC = () => {
                 <Select placeholder="Vui lòng chọn">
                   <Option value="Breakfast">Breakfast</Option>
                   <Option value="Laundry">Laundry</Option>
-                  <Option value="Laundry">Room Detail</Option>
+                  <Option value="Roomdetail">Room Detail</Option>
                   <Option value="Qualification">Qualification</Option>
                 </Select>
               </Form.Item>
@@ -109,13 +137,13 @@ const Cskhbutton: React.FC = () => {
                 rules={[
                   {
                     required: true,
-                    message: "please enter description",
+                    message: "Vui lòng nhập câu hỏi của bạn",
                   },
                 ]}
               >
                 <Input.TextArea
                   rows={4}
-                  placeholder="please enter your description"
+                  placeholder="Nhập câu hỏi của bạn"
                 />
               </Form.Item>
             </Col>
