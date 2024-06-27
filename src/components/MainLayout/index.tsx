@@ -74,14 +74,20 @@ export const MainLayout = () => {
             justifyContent: "center",
             alignItems: "center",
             minHeight: "20vh",
-            gap:"10px"
+            gap: "10px",
           }}
         >
-             <Cskhbutton/>
+          <Cskhbutton />
           {/* Nút "Loại Phòng" với sự kiện onClick */}
-          <Button size="large" type="primary" onClick={handleRoomButtonClick}>
+
+          <Button
+            style={{ backgroundColor: "#663366" }}
+            size="large"
+            type="primary"
+            onClick={handleRoomButtonClick}
+          >
             Loại Phòng
-          </Button>{" "}
+          </Button>
         </div>
 
         <br />
@@ -108,7 +114,7 @@ export const MainLayout = () => {
           </div>
         </Carousel>
       </>
-      <FooterClient/>
+      <FooterClient />
     </div>
   );
 };

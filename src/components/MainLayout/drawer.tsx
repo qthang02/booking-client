@@ -59,7 +59,7 @@ const Booking: React.FC = () => {
 
   return (
     <>
-      <Button size="large" type="primary" onClick={showDrawer}>
+      <Button style={{ backgroundColor: "#663366" }} size="large" type="primary" onClick={showDrawer}>
         Đặt Phòng
       </Button>
       <Drawer
@@ -72,8 +72,8 @@ const Booking: React.FC = () => {
         }}
         extra={
           <Space>
-            <Button onClick={onClose}>Cancel</Button>
-            <Button onClick={handleSubmit} type="primary">
+            <Button style={{ color: "#FF0000" }} onClick={onClose}>Cancel</Button>
+            <Button style={{ backgroundColor: "#663366" }} onClick={handleSubmit}  type="primary">
               Xác nhận
             </Button>
           </Space>

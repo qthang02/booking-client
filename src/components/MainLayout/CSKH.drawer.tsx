@@ -28,7 +28,10 @@ const Cskhbutton: React.FC = () => {
 
   const handleSubmit = async (values: CustomerCareFormData) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/customercare", values);
+      const response = await axios.post(
+        "http://localhost:5000/api/customercare",
+        values
+      );
       console.log("Customer care submitted:", response.data);
       setOpen(false); // Close the drawer after submission
       form.resetFields(); // Reset form fields after submission
@@ -43,7 +46,7 @@ const Cskhbutton: React.FC = () => {
 
   return (
     <>
-      <Button size="large" type="primary" onClick={showDrawer}>
+      <Button style={{ backgroundColor: "#663366" }} size="large" type="primary" onClick={showDrawer}>
         Chăm sóc khách hàng
       </Button>
       <Drawer
@@ -63,6 +66,7 @@ const Cskhbutton: React.FC = () => {
               onClick={() => {
                 form.submit();
               }}
+              style={{ backgroundColor: "#663366" }}
               type="primary"
             >
               Gửi
@@ -141,10 +145,7 @@ const Cskhbutton: React.FC = () => {
                   },
                 ]}
               >
-                <Input.TextArea
-                  rows={4}
-                  placeholder="Nhập câu hỏi của bạn"
-                />
+                <Input.TextArea rows={4} placeholder="Nhập câu hỏi của bạn" />
               </Form.Item>
             </Col>
           </Row>

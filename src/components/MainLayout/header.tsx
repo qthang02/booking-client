@@ -1,17 +1,11 @@
-import {
-  Avatar,
-  Button,
-  DatePicker,
-  Dropdown,
-  Input,
-  MenuProps,
-  Space,
-} from "antd";
-import { MenuOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Dropdown, MenuProps, Space } from "antd";
+import { MenuOutlined, UserOutlined } from "@ant-design/icons";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
-let navigation: NavigateFunction | ((arg0: string) => void);
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHotel } from "@fortawesome/free-solid-svg-icons";
 
+let navigation: NavigateFunction | ((arg0: string) => void);
 
 export const Header = () => {
   navigation = useNavigate();
@@ -30,7 +24,6 @@ export const Header = () => {
       ),
       onClick: () => navigation("/"),
     },
-
     {
       key: "1",
       label: (
@@ -75,200 +68,71 @@ export const Header = () => {
     },
   ];
 
-  const { RangePicker } = DatePicker;
-
-  const itemOptionMenu: MenuProps["items"] = [
-    {
-      key: "1",
-      label: (
-        <div
-          style={{
-            width: "400px",
-            height: "200px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "20px",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-              borderBottom: "gray 1px solid",
-              padding: "15px 5px",
-            }}
-          >
-            <span>Người lớn</span>
-            <span
-              style={{
-                width: "150px",
-                height: "max-content",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <Button>-</Button>
-              <span>1</span>
-              <Button>+</Button>
-            </span>
-          </div>
-
-          <div
-            style={{
-              fontSize: "20px",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-              borderBottom: "gray 1px solid",
-              padding: "10px 5px",
-            }}
-          >
-            <span>Trẻ em</span>
-            <span
-              style={{
-                width: "150px",
-                height: "max-content",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <Button>-</Button>
-              <span>1</span>
-              <Button>+</Button>
-            </span>
-          </div>
-
-          <div
-            style={{
-              fontSize: "20px",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-              padding: "10px 5px",
-            }}
-          >
-            <span>Phòng</span>
-            <span
-              style={{
-                width: "150px",
-                height: "max-content",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <Button>-</Button>
-              <span>1</span>
-              <Button>+</Button>
-            </span>
-          </div>
-        </div>
-      ),
-    },
-  ];
-
   return (
     <Space
       style={{
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
+        alignItems: "center",
         width: "100%",
         height: "80px",
         borderBottom: "#C7C8CC 1px solid",
+        backgroundColor: "#FFFFFF",
+        padding: "0 20px",
       }}
     >
-      <span
-        style={{
-          color: "#3572EF",
-          fontWeight: "bold",
-          fontSize: "xx-large",
-        }}
-      >
-        Shelby Hotel
-      </span>
-
-      {/*search box*/}
       <div
         style={{
           display: "flex",
-          flexDirection: "row",
-          border: "gray 1px solid",
-          borderRadius: "30px",
-          padding: "5px",
+          alignItems: "center",
+          position: "relative",
+          left: "50px",
         }}
       >
-        <div
+        <FontAwesomeIcon
+          icon={faHotel}
           style={{
-            borderRight: "gray 1px solid",
-            width: "300px",
-            padding: "5px",
+            fontSize: "50px",
+            color: "#663366",
+            opacity: 0.2,
+            position: "absolute",
+            left: 0,
+          }}
+        />
+        <span
+          style={{
+            color: "#663366",
+            fontWeight: "bold",
+            fontSize: "xx-large",
+            whiteSpace: "nowrap",
+            position: "relative",
+            left: "10px",
+            backgroundColor: "#FFFFFF",
+            fontFamily: "'Roboto', sans-serif",
           }}
         >
-          <Input
-            size="large"
-            placeholder="Search..."
-            style={{
-              width: "300px",
-              height: "100%",
-              padding: "0",
-              border: "none",
-              background: "none",
-              fontSize: "25px",
-              margin: "auto",
-            }}
-          />
-        </div>
-
-        {/*date picker*/}
-        <div
-          style={{
-            borderRight: "gray 1px solid",
-            width: "300px",
-            margin: "auto 0",
-            padding: "5px",
-          }}
-        >
-          <RangePicker />
-        </div>
-
-        <div
-          style={{
-            width: "300px",
-            padding: "5px",
-            marginLeft: "10px",
-            margin: "auto 0",
-          }}
-        >
-          <Dropdown menu={{ items: itemOptionMenu }} placement="bottomLeft">
-            <span>1 người lớn • 0 trẻ em • 1 phòng</span>
-          </Dropdown>
-        </div>
-
-        {/*search button*/}
-        <div
-          style={{
-            width: "30px",
-            height: "30px",
-            padding: "5px",
-            backgroundColor: "#3572EF",
-            border: "gray 1px solid",
-            borderRadius: "50%",
-            fontSize: "x-large",
-            color: "white",
-            margin: "auto",
-            cursor: "pointer",
-          }}
-        >
-          <SearchOutlined />
-        </div>
+          Shelby Hotel
+        </span>
       </div>
 
-      {/*menu*/}
+      <div style={{marginLeft: "-20px"}}>
+      <span
+        style={{
+          color: "#663366",
+          fontWeight: "bold",
+          fontSize: "large",
+          whiteSpace: "nowrap",
+
+          alignItems: "center",
+          justifyContent: "center",
+          fontFamily: "'Lato', sans-serif",
+        }}
+      >
+        SHELBY SAIGON CENTRE
+      </span>
+      </div>
+
       <Dropdown menu={{ items }} placement="bottomRight">
         <div
           style={{
@@ -281,9 +145,9 @@ export const Header = () => {
             width: "86px",
             border: "gray 1px solid",
             borderRadius: "24px",
-            padding: "2px",
+            padding: "5px",
             cursor: "pointer",
-            marginRight: "20px",
+            marginRight: "70px",
           }}
         >
           <MenuOutlined />

@@ -7,7 +7,7 @@ import React from "react";
 const { Meta } = Card;
 
 const RoomList: React.FC = () => {
-  // Mảng chứa các sản phẩm (ví dụ)
+  
   const rooms = [
     {
       id: 1,
