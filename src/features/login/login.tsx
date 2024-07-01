@@ -51,7 +51,7 @@ const Login: React.FC = () => {
             style={{
               textAlign: "center",
               marginBottom: "20px",
-              color: "#3572EF",
+              color: "#663366",
               fontWeight: "bold",
               fontSize: "xx-large",
             }}
@@ -105,14 +105,19 @@ const Login: React.FC = () => {
             </Form.Item>
 
             <Form.Item {...tailFormItemLayout} style={{ textAlign: "center" }}>
-              <Button type="primary" htmlType="submit" size="large">
+              <Button
+                style={{ backgroundColor: "#663366", borderColor: "#663366" }}
+                type="primary"
+                htmlType="submit"
+                size="large"
+              >
                 Sign In
               </Button>
             </Form.Item>
           </Form>
         </Space>
       </div>
-      <FooterClient/>
+      <FooterClient />
     </div>
   );
 };

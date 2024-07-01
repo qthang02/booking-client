@@ -62,7 +62,7 @@ const Register: React.FC = () => {
             style={{
               textAlign: "center",
               marginBottom: "20px",
-              color: "#3572EF",
+              color: "#663366",
               fontWeight: "bold",
               fontSize: "xx-large",
             }}
@@ -185,7 +185,12 @@ const Register: React.FC = () => {
             </Form.Item>
 
             <Form.Item {...tailFormItemLayout} style={{ textAlign: "center" }}>
-              <Button type="primary" htmlType="submit" size="large">
+              <Button
+                type="primary"
+                htmlType="submit"
+                size="large"
+                style={{ backgroundColor: "#663366", borderColor: "#663366" }}
+              >
                 Register
               </Button>
             </Form.Item>

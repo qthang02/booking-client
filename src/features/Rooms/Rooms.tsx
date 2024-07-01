@@ -1,6 +1,7 @@
 import { Card, Col, Row } from "antd";
 
 import Booking from "../../components/MainLayout/drawer";
+import FooterClient from "../../components/MainLayout/footer";
 import { Header } from "../../components/MainLayout/header";
 import React from "react";
 
@@ -73,6 +74,7 @@ const RoomList: React.FC = () => {
           ))}
         </Row>
       </div>
+      <FooterClient/>
     </div>
   );
 };

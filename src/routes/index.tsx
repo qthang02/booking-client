@@ -1,5 +1,6 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 
+import AboutUs from "../features/About us/Aboutus";
 import BookingHistory from "../features/booking history/bookinghistory";
 import Login from "../features/login/login";
 import { MainLayout } from "../components/MainLayout";
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
   {
     path: "/payment",
     element: <Payment />,
+  },
+  {
+    path: "/about-us",
+    element: <AboutUs />,
   },
   {
     path: "*",

@@ -1,4 +1,10 @@
-import { Button, Carousel } from "antd";
+import { Button, Carousel, Col, Layout, Row, Typography } from "antd";
+import {
+  FacebookOutlined,
+  InstagramOutlined,
+  LinkedinOutlined,
+  TwitterOutlined,
+} from "@ant-design/icons";
 
 import Cskhbutton from "./CSKH.drawer.tsx";
 import FooterClient from "./footer.tsx";
@@ -6,11 +12,14 @@ import { Header } from "./header.tsx";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+const { Content } = Layout;
+const { Title, Paragraph, Text } = Typography;
+
 const contentStyle: React.CSSProperties = {
   margin: 0,
-  height: "450px", // Giảm chiều cao của contentStyle
+  height: "450px",
   color: "#fff",
-  lineHeight: "450px", // Căn giữa nội dung dọc theo chiều cao mới
+  lineHeight: "450px",
   textAlign: "center",
 };
 
@@ -18,6 +27,36 @@ const imageStyle: React.CSSProperties = {
   width: "100%",
   height: "100%",
   objectFit: "cover",
+};
+
+const buttonStyle: React.CSSProperties = {
+  backgroundColor: "#663366",
+  borderColor: "#663366",
+  fontSize: "16px",
+  fontWeight: "bold",
+  color: "#fff",
+  borderRadius: "5px",
+};
+
+const containerStyle: React.CSSProperties = {
+  backgroundColor: "#f8f8f8",
+  padding: "20px",
+};
+
+const infoStyle: React.CSSProperties = {
+  padding: "20px",
+  backgroundColor: "#fff",
+  borderRadius: "5px",
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  margin: "20px auto",
+  maxWidth: "100%",
+  width: "100%",
+};
+
+const socialIconStyle: React.CSSProperties = {
+  fontSize: "24px",
+  margin: "0 10px",
+  color: "#663366",
 };
 
 export const MainLayout = () => {
@@ -28,10 +67,15 @@ export const MainLayout = () => {
     navigate("/rooms"); // Điều hướng đến đường dẫn /rooms
   };
 
+  // Hàm xử lý khi click vào nút "About Us"
+  const handleAboutUsButtonClick = () => {
+    navigate("/about-us"); // Điều hướng đến đường dẫn /about-us
+  };
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <Layout className="flex flex-col min-h-screen">
       <Header />
-      <>
+      <Content>
         <Carousel
           effect="fade"
           arrows
@@ -75,22 +119,63 @@ export const MainLayout = () => {
             alignItems: "center",
             minHeight: "20vh",
             gap: "10px",
+            padding: "20px 0",
           }}
         >
           <Cskhbutton />
-          {/* Nút "Loại Phòng" với sự kiện onClick */}
-
           <Button
-            style={{ backgroundColor: "#663366" }}
+            style={buttonStyle}
             size="large"
             type="primary"
             onClick={handleRoomButtonClick}
           >
             Loại Phòng
           </Button>
+          <Button
+            style={buttonStyle}
+            size="large"
+            type="primary"
+            onClick={handleAboutUsButtonClick}
+          >
+            About Us
+          </Button>
         </div>
 
-        <br />
+        <div style={{ maxWidth: "100%", padding: "0 20px" }}>
+          <div style={infoStyle}>
+            <Title level={2} style={{ color: "#663366", padding: "0 50px" }}>
+              THE HOTEL
+            </Title>
+            <Paragraph>
+              Located centrally within Ho Chi Minh City, close to Ben Thanh
+              market, Pham Ngu Lao area, many tourist attractions and 30 minutes
+              to SECC, the hotel features 306 signature rooms combining design,
+              comfort and connectivity. Facilities include all day dining
+              restaurant, pop-up burger bar and Mad Cow Wine & Grill with
+              panoramic views of the city. The hotel also has free Wi-Fi, swimming
+              pool, fitness centre, spa and high-tech meeting venues able to host
+              up to 350 guests.
+            </Paragraph>
+            <Title level={3} style={{ color: "#663366" }}>
+              Shelby Saigon Centre ☆☆☆☆☆
+            </Title>
+            <Paragraph>
+              148 Tran Hung Dao Boulevard, District 1, 70000 Ho Chi Minh City
+              <br />
+              Vietnam
+              <br />
+              <Text strong>Tel:</Text> +84 (0)28 3838 8686
+              <br />
+              <Text strong>Fax:</Text> +84 (0)28 3838 8627
+              <br />
+              <Text strong>Email:</Text> H7489@ACCOR.COM
+              <br />
+            </Paragraph>
+            <Button type="link" style={{ padding: 0 }}>
+              See the Map
+            </Button>
+          </div>
+        </div>
         <Carousel
           effect="fade"
           arrows
@@ -113,8 +198,22 @@ export const MainLayout = () => {
             />
           </div>
         </Carousel>
-      </>
+        <div style={{ ...infoStyle, textAlign: "center" }}>
+          <Title level={3} style={{ color: "#663366" }}>
+            FOLLOW US
+          </Title>
+          <Paragraph>
+            Stay in touch and connected to all the news and happenings.
+          </Paragraph>
+          <div>
+            <FacebookOutlined style={socialIconStyle} />
+            <LinkedinOutlined style={socialIconStyle} />
+            <TwitterOutlined style={socialIconStyle} />
+            <InstagramOutlined style={socialIconStyle} />
+          </div>
+        </div>
+      </Content>
       <FooterClient />
-    </div>
+    </Layout>
   );
 };

@@ -14,6 +14,8 @@ interface Booking {
   parkingOption: string;
   time: number;
   description: string;
+  totalPrice: number;
+  status: string;
 }
 
 const Payment: React.FC = () => {
@@ -101,8 +103,7 @@ const Payment: React.FC = () => {
           </p>
           <Divider />
           <p>
-            <strong>Đỗ Xe:</strong>{" "}
-            {latestBooking.parkingOption === "yes" ? "Có" : "Không"}
+            <strong>Đỗ Xe:</strong> {latestBooking.parkingOption === "yes" ? "Có" : "Không"}
           </p>
           <Divider />
           <p>
@@ -111,6 +112,10 @@ const Payment: React.FC = () => {
           <Divider />
           <p>
             <strong>Ghi Chú:</strong> {latestBooking.description}
+          </p>
+          <Divider />
+          <p>
+            <strong>Tổng Tiền:</strong> ${latestBooking.totalPrice}
           </p>
         </Card>
         <div style={{ marginTop: 24 }}>
