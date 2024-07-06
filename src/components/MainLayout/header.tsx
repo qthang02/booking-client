@@ -1,6 +1,7 @@
 import { Avatar, Dropdown, MenuProps, Space } from "antd";
 import { MenuOutlined, UserOutlined } from "@ant-design/icons";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHotel } from "@fortawesome/free-solid-svg-icons";
@@ -9,64 +10,108 @@ let navigation: NavigateFunction | ((arg0: string) => void);
 
 export const Header = () => {
   navigation = useNavigate();
-  const items: MenuProps["items"] = [
-    {
-      key: "4",
-      label: (
-        <span
-          style={{
-            fontSize: "18px",
-            fontWeight: "bolder",
-          }}
-        >
-          Trang chủ
-        </span>
-      ),
-      onClick: () => navigation("/"),
-    },
-    {
-      key: "1",
-      label: (
-        <span
-          style={{
-            fontSize: "18px",
-            fontWeight: "bolder",
-          }}
-        >
-          Đăng ký
-        </span>
-      ),
-      onClick: () => navigation("/register"),
-    },
-    {
-      key: "2",
-      label: (
-        <span
-          style={{
-            fontSize: "18px",
-            fontWeight: "bolder",
-          }}
-        >
-          Đăng nhập
-        </span>
-      ),
-      onClick: () => navigation("/login"),
-    },
-    {
-      key: "3",
-      label: (
-        <span
-          style={{
-            fontSize: "18px",
-            fontWeight: "bolder",
-          }}
-        >
-          Lịch sử đặt phòng
-        </span>
-      ),
-      onClick: () => navigation("/bookinghistory"),
-    },
-  ];
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsAuthenticated(!!token);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+    navigation("/login");
+  };
+
+  const items: MenuProps["items"] = isAuthenticated
+    ? [
+        {
+          key: "4",
+          label: (
+            <span
+              style={{
+                fontSize: "18px",
+                fontWeight: "bolder",
+              }}
+            >
+              Trang chủ
+            </span>
+          ),
+          onClick: () => navigation("/"),
+        },
+        {
+          key: "3",
+          label: (
+            <span
+              style={{
+                fontSize: "18px",
+                fontWeight: "bolder",
+              }}
+            >
+              Lịch sử đặt phòng
+            </span>
+          ),
+          onClick: () => navigation("/bookinghistory"),
+        },
+        {
+          key: "5",
+          label: (
+            <span
+              style={{
+                fontSize: "18px",
+                fontWeight: "bolder",
+              }}
+            >
+              Đăng xuất
+            </span>
+          ),
+          onClick: handleLogout,
+        },
+      ]
+    : [
+        {
+          key: "4",
+          label: (
+            <span
+              style={{
+                fontSize: "18px",
+                fontWeight: "bolder",
+              }}
+            >
+              Trang chủ
+            </span>
+          ),
+          onClick: () => navigation("/"),
+        },
+        {
+          key: "1",
+          label: (
+            <span
+              style={{
+                fontSize: "18px",
+                fontWeight: "bolder",
+              }}
+            >
+              Đăng ký
+            </span>
+          ),
+          onClick: () => navigation("/register"),
+        },
+        {
+          key: "2",
+          label: (
+            <span
+              style={{
+                fontSize: "18px",
+                fontWeight: "bolder",
+              }}
+            >
+              Đăng nhập
+            </span>
+          ),
+          onClick: () => navigation("/login"),
+        },
+      ];
 
   return (
     <Space
@@ -116,21 +161,20 @@ export const Header = () => {
         </span>
       </div>
 
-      <div style={{marginLeft: "-20px"}}>
-      <span
-        style={{
-          color: "#663366",
-          fontWeight: "bold",
-          fontSize: "large",
-          whiteSpace: "nowrap",
-
-          alignItems: "center",
-          justifyContent: "center",
-          fontFamily: "'Lato', sans-serif",
-        }}
-      >
-        SHELBY SAIGON CENTRE
-      </span>
+      <div style={{ marginLeft: "-20px" }}>
+        <span
+          style={{
+            color: "#663366",
+            fontWeight: "bold",
+            fontSize: "large",
+            whiteSpace: "nowrap",
+            alignItems: "center",
+            justifyContent: "center",
+            fontFamily: "'Lato', sans-serif",
+          }}
+        >
+          SHELBY SAIGON CENTRE
+        </span>
       </div>
 
       <Dropdown menu={{ items }} placement="bottomRight">

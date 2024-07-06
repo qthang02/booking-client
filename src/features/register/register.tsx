@@ -3,38 +3,17 @@ import { Button, Checkbox, Form, Input, Select, Space } from "antd";
 import FooterClient from "../../components/MainLayout/footer";
 import { Header } from "../../components/MainLayout/header";
 import React from "react";
+import { RegisterRequset } from "../../model/authen";
+import { useRegister } from "../../query/authen";
 
 const { Option } = Select;
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 },
-  },
-};
-
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
-
 const Register: React.FC = () => {
   const [form] = Form.useForm();
+  const registerMutation = useRegister();
 
-  const onFinish = () => {
-    console.log("Received values of form: ");
+  const onFinish = (values: RegisterRequset) => {
+    registerMutation.mutate(values);
   };
 
   const prefixSelector = (
@@ -47,17 +26,10 @@ const Register: React.FC = () => {
   );
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div>
       <Header />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "100vh",
-        }}
-      >
-        <Space direction="vertical" size="large">
+      <div className="flex flex-col min-h-screen">
+        <div>
           <h1
             style={{
               textAlign: "center",
@@ -65,137 +37,130 @@ const Register: React.FC = () => {
               color: "#663366",
               fontWeight: "bold",
               fontSize: "xx-large",
+              marginTop: "20px",
             }}
           >
-            Shelby Hotel
+            Đăng Ký
           </h1>
-          <Form
-            {...formItemLayout}
-            form={form}
-            name="register"
-            onFinish={onFinish}
-            initialValues={{
-              residence: ["zhejiang", "hangzhou", "xihu"],
-              prefix: "86",
-            }}
-            style={{
-              width: 500,
-              padding: "20px",
-              border: "1px solid #e8e8e8",
-              borderRadius: "5px",
-            }}
-            scrollToFirstError
-          >
-            <Form.Item
-              name="email"
-              label="E-mail"
-              rules={[
-                {
-                  type: "email",
-                  message: "The input is not valid E-mail!",
-                },
-                {
-                  required: true,
-                  message: "Please input your E-mail!",
-                },
-              ]}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "100vh",
+          }}
+        >
+          <Space direction="vertical" size="large">
+            <Form
+              name="register"
+              form={form}
+              initialValues={{ prefix: "86" }}
+              onFinish={onFinish}
+              style={{
+                width: 500,
+                padding: "20px",
+                border: "1px solid #e8e8e8",
+                borderRadius: "5px",
+              }}
+              scrollToFirstError
             >
-              <Input size="large" />
-            </Form.Item>
-
-            <Form.Item
-              name="password"
-              label="Password"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your password!",
-                },
-              ]}
-              hasFeedback
-            >
-              <Input.Password size="large" />
-            </Form.Item>
-
-            <Form.Item
-              name="confirm"
-              label="Confirm Password"
-              dependencies={["password"]}
-              hasFeedback
-              rules={[
-                {
-                  required: true,
-                  message: "Please confirm your password!",
-                },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue("password") === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(
-                      new Error("The passwords that you entered do not match!")
-                    );
-                  },
-                }),
-              ]}
-            >
-              <Input.Password size="large" />
-            </Form.Item>
-
-            <Form.Item
-              name="phone"
-              label="Phone Number"
-              rules={[
-                { required: true, message: "Please input your phone number!" },
-              ]}
-            >
-              <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
-            </Form.Item>
-
-            <Form.Item
-              name="gender"
-              label="Gender"
-              rules={[{ required: true, message: "Please select gender!" }]}
-            >
-              <Select placeholder="Select your gender" size="large">
-                <Option value="male">Male</Option>
-                <Option value="female">Female</Option>
-                <Option value="other">Other</Option>
-              </Select>
-            </Form.Item>
-
-            <Form.Item
-              name="agreement"
-              valuePropName="checked"
-              rules={[
-                {
-                  validator: (_, value) =>
-                    value
-                      ? Promise.resolve()
-                      : Promise.reject(
-                          new Error("You must accept the agreement")
-                        ),
-                },
-              ]}
-              {...tailFormItemLayout}
-            >
-              <Checkbox>
-                I have read the <a href="/">agreement</a>
-              </Checkbox>
-            </Form.Item>
-
-            <Form.Item {...tailFormItemLayout} style={{ textAlign: "center" }}>
-              <Button
-                type="primary"
-                htmlType="submit"
-                size="large"
-                style={{ backgroundColor: "#663366", borderColor: "#663366" }}
+              <Form.Item
+                name="email"
+                label="E-mail"
+                rules={[
+                  { type: "email", message: "Địa chỉ email không hợp lệ!" },
+                  { required: true, message: "Vui lòng nhập email!" },
+                ]}
               >
-                Register
-              </Button>
-            </Form.Item>
-          </Form>
-        </Space>
+                <Input size="large" />
+              </Form.Item>
+
+              <Form.Item
+                name="password"
+                label="Password"
+                rules={[{ required: true, message: "Vui lòng nhập mật khẩu!" }]}
+                hasFeedback
+              >
+                <Input.Password size="large" />
+              </Form.Item>
+
+              <Form.Item
+                name="confirm"
+                label="Confirm Password"
+                dependencies={["password"]}
+                hasFeedback
+                rules={[
+                  { required: true, message: "Vui lòng xác nhận mật khẩu!" },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(new Error("Mật khẩu không khớp!"));
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password size="large" />
+              </Form.Item>
+
+              <Form.Item
+                name="phone"
+                label="Phone Number"
+                rules={[
+                  { required: true, message: "Vui lòng nhập số điện thoại!" },
+                ]}
+              >
+                <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
+              </Form.Item>
+
+              <Form.Item
+                name="gender"
+                label="Gender"
+                rules={[
+                  { required: true, message: "Vui lòng chọn giới tính!" },
+                ]}
+              >
+                <Select placeholder="Chọn giới tính" size="large">
+                  <Option value="male">Nam</Option>
+                  <Option value="female">Nữ</Option>
+                  <Option value="other">Khác</Option>
+                </Select>
+              </Form.Item>
+
+              <Form.Item
+                name="agreement"
+                valuePropName="checked"
+                rules={[
+                  {
+                    validator: (_, value) =>
+                      value
+                        ? Promise.resolve()
+                        : Promise.reject(
+                            new Error("Bạn phải đồng ý với điều khoản")
+                          ),
+                  },
+                ]}
+              >
+                <Checkbox>
+                  Tôi đã đọc và đồng ý với <a href="/">điều khoản</a>
+                </Checkbox>
+              </Form.Item>
+
+              <Form.Item style={{ textAlign: "center" }}>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  size="large"
+                  style={{ backgroundColor: "#663366", borderColor: "#663366" }}
+                >
+                  Đăng Ký
+                </Button>
+              </Form.Item>
+            </Form>
+          </Space>
+        </div>
       </div>
       <FooterClient />
     </div>
