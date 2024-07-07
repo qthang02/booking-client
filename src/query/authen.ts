@@ -1,6 +1,7 @@
 import { LoginRequest, RegisterRequset } from "../model/authen";
 
 import axios from "axios";
+import { notification } from "antd";
 import { useMutation } from "react-query";
 
 const api = `https://3586-113-161-37-63.ngrok-free.app`;
@@ -13,11 +14,17 @@ export const useRegister = () => {
     return useMutation({
         mutationFn: (req: RegisterRequset) => apiRegister(req),
         onSuccess: () => {
-            console.log("Call api success!");
+            notification.success({
+                message: "Đăng kí thành công!",
+                description: "Call api success!",
+              });
         },
-        onError: ()=>{
-            console.log("Call api failed!");
-        }
+        onError: () => {
+            notification.error({
+              message: "Đăng kí thất bại!",
+              description: "Call api failed!",
+            });
+          },
     })
 }
 
@@ -29,10 +36,16 @@ export const useLogin = () => {
     return useMutation({
         mutationFn: (req: LoginRequest) => apiLogin(req),
         onSuccess: () => {
-            console.log("Call api success!");
+            notification.success({
+                message: "Đăng nhập thành công!",
+                description: "Call api success!",
+              });
         },
-        onError: ()=>{
-            console.log("Call api failed!");
-        }
+        onError: () => {
+            notification.error({
+              message: "Đăng nhập thất bại!",
+              description: "Call api failed!",
+            });
+          },
     })
 }
