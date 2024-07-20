@@ -64,7 +64,7 @@ export const MainLayout = () => {
 
   // Hàm xử lý khi click vào nút "Loại Phòng"
   const handleRoomButtonClick = () => {
-    navigate("/rooms"); // Điều hướng đến đường dẫn /rooms
+    navigate("/categories"); // Điều hướng đến đường dẫn /rooms
   };
 
   // Hàm xử lý khi click vào nút "About Us"

@@ -4,17 +4,18 @@ import {
   Drawer,
   Form,
   Input,
-  InputNumber,
   Row,
   Select,
   Space,
 } from "antd";
 import React, { useState } from "react";
 
+import { DatePicker } from 'antd';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
+const { RangePicker } = DatePicker;
 
 const roomPrices: { [key: string]: number } = {
   ORIGINAL: 50,
@@ -125,7 +126,7 @@ const Booking: React.FC = () => {
       </Button>
       <Drawer
         title="Booking"
-        width={720}
+        width={560}
         onClose={onClose}
         open={open}
         style={{
@@ -162,7 +163,12 @@ const Booking: React.FC = () => {
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item
+            
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+            <Form.Item
                 name="roomType"
                 label="Loại Phòng"
                 rules={[
@@ -186,59 +192,9 @@ const Booking: React.FC = () => {
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item
-                name="services"
-                label="Các dịch vụ khác"
-                rules={[
-                  { required: true, message: "Vui lòng chọn các dịch vụ" },
-                ]}
-              >
-                <Select
-                  mode="multiple"
-                  placeholder="Chọn các dịch vụ"
-                  value={services}
-                  onChange={(value) => setServices(value)}
-                >
-                  <Option value="Breakfast">Breakfast 15$</Option>
-                  <Option value="Laundry">Laundry 10$</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name="parkingOption"
-                label="Đỗ xe ô tô"
-                rules={[
-                  { required: true, message: "Vui lòng chọn tình trạng đỗ xe" },
-                ]}
-              >
-                <Select
-                  placeholder="Chọn tình trạng đỗ xe"
-                  value={parkingOption}
-                  onChange={(value) => setParkingOption(value)}
-                >
-                  <Option value="yes">Có</Option>
-                  <Option value="no">Không</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="time"
-                label="Thời Gian (Ngày)"
-                rules={[
-                  { required: true, message: "Vui lòng nhập thời gian" },
-                  { type: "number", message: "Vui lòng nhập số" },
-                ]}
-              >
-                <InputNumber
-                  style={{ width: "100%" }}
-                  value={time}
-                  onChange={(value) => setTime(value)}
-                />
-              </Form.Item>
+              <Space direction="vertical" size={12}>
+                <RangePicker  placeholder={['Checkin', 'Checkout']} />
+              </Space>
             </Col>
           </Row>
           <Row>

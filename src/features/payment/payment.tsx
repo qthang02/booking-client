@@ -66,7 +66,7 @@ const Payment: React.FC = () => {
       const updatedBooking = { ...latestBooking, status: "cancelled" };
       await axios.put(`http://localhost:5000/api/bookings/${latestBooking.id}`, updatedBooking);
       message.success("Đã hủy đặt phòng thành công!");
-      navigate("/rooms");
+      navigate("/categories");
     } catch (error) {
       console.error("Error cancelling booking:", error);
       message.error("Không thể hủy đặt phòng. Vui lòng thử lại sau.");
