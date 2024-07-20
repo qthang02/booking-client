@@ -1,4 +1,4 @@
-import { Button, Carousel, Col, Layout, Row, Typography } from "antd";
+import { Button, Carousel, Layout, Typography } from "antd";
 import {
   FacebookOutlined,
   InstagramOutlined,
@@ -38,10 +38,10 @@ const buttonStyle: React.CSSProperties = {
   borderRadius: "5px",
 };
 
-const containerStyle: React.CSSProperties = {
-  backgroundColor: "#f8f8f8",
-  padding: "20px",
-};
+// const containerStyle: React.CSSProperties = {
+//   backgroundColor: "#f8f8f8",
+//   padding: "20px",
+// };
 
 const infoStyle: React.CSSProperties = {
   padding: "20px",
@@ -64,7 +64,7 @@ export const MainLayout = () => {
 
   // Hàm xử lý khi click vào nút "Loại Phòng"
   const handleRoomButtonClick = () => {
-    navigate("/rooms"); // Điều hướng đến đường dẫn /rooms
+    navigate("/categories"); // Điều hướng đến đường dẫn /rooms
   };
 
   // Hàm xử lý khi click vào nút "About Us"
