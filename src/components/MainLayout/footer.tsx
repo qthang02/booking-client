@@ -7,7 +7,16 @@ const { Text } = Typography;
 const FooterClient = () => {
     return (
         // #0077b5
-        <Footer style={{ backgroundColor: '#663366', color: 'white', textAlign: 'center' }}>
+        <Footer
+            style={{
+                backgroundColor: '#663366',
+                color: 'white',
+                position: "static",
+                width:'100%',
+                bottom: "0",
+                paddingRight: "0",
+                paddingLeft: "0"
+            }}>
             <Row justify="center" align="middle">
                 <Col xs={24} sm={24} md={12} lg={8} xl={6}>
                     <Space direction="vertical" size="small">
