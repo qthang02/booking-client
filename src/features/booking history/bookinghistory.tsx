@@ -115,7 +115,7 @@ const BookingHistory: React.FC = () => {
       title: "Thao Tác",
       key: "action",
       width: "100px",
-      render: (text: string, record: Booking) => (
+      render: (_: string, record: Booking) => (
         <Button type="primary" onClick={() => showDrawer(record)}>
           Xem Chi Tiết
         </Button>
