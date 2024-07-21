@@ -4,16 +4,25 @@ import FooterClient from "../../components/MainLayout/footer";
 import { Header } from "../../components/MainLayout/header";
 import React from "react";
 import { RegisterRequset } from "../../model/authen";
+import { useNavigate } from "react-router-dom";
 import { useRegister } from "../../query/authen";
 
 const { Option } = Select;
 
 const Register: React.FC = () => {
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const registerMutation = useRegister();
 
   const onFinish = (values: RegisterRequset) => {
-    registerMutation.mutate(values);
+    registerMutation.mutate(values, {
+      onSuccess: () => {
+        navigate("/login");
+      },
+      onError: () => {
+        console.log("login Failed");
+      },
+    });
   };
 
   const prefixSelector = (

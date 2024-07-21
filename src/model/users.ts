@@ -1,3 +1,5 @@
+import { users } from './users';
+
 export interface users {
     id: number,
     username: string,
@@ -5,4 +7,8 @@ export interface users {
     address: string,
     email: string,
     role: ['customer', 'staff', 'admin'],
+}
+
+export interface ProfileResponse {
+    user: users;
 }

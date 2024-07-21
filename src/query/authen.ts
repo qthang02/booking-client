@@ -4,7 +4,7 @@ import axios from "axios";
 import { notification } from "antd";
 import { useMutation } from "react-query";
 
-const api = `http://api.thangnq.studio:8080`;
+const api = `https://0e1f-113-22-160-189.ngrok-free.app`;
 
 const apiRegister = (req: RegisterRequset): Promise<void> => {
     return axios.post(`${api}/api/v1/auth/register`, req);

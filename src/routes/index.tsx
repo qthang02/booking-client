@@ -7,6 +7,7 @@ import { MainLayout } from "../components/MainLayout";
 import Payment from "../features/payment/payment";
 import Register from "../features/register/register";
 import RoomList from "../features/Rooms/Rooms";
+import UserProfile from "../features/Profile User/ProfileUser";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
   {
     path: "/about-us",
     element: <AboutUs />,
+  },
+  {
+    path: "/profile",
+    element: <UserProfile />,
   },
   {
     path: "*",

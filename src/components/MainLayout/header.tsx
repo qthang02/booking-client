@@ -34,10 +34,10 @@ export const Header = () => {
                 fontWeight: "bolder",
               }}
             >
-              Trang chủ
+              Tài khoản
             </span>
           ),
-          onClick: () => navigation("/"),
+          onClick: () => navigation("/profile"),
         },
         {
           key: "3",
