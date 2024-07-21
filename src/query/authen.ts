@@ -1,10 +1,10 @@
-import { LoginRequest, RegisterRequset } from "../model/authen";
+import { LoginRequest, LoginResponse, RegisterRequset } from "../model/authen";
 
 import axios from "axios";
 import { notification } from "antd";
 import { useMutation } from "react-query";
 
-const api = `https://3586-113-161-37-63.ngrok-free.app`;
+const api = `http://api.thangnq.studio:8080`;
 
 const apiRegister = (req: RegisterRequset): Promise<void> => {
     return axios.post(`${api}/api/v1/auth/register`, req);
@@ -28,7 +28,7 @@ export const useRegister = () => {
     })
 }
 
-const apiLogin = (req: LoginRequest): Promise<void> => {
+const apiLogin = (req: LoginRequest): Promise<LoginResponse> => {
     return axios.post(`${api}/api/v1/auth/login`, req);
 }
 

@@ -11,6 +11,7 @@ import {
 import React, { useState } from "react";
 
 import { DatePicker } from 'antd';
+import type { DatePickerProps } from 'antd';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -61,7 +62,7 @@ const Booking: React.FC = () => {
 
   const generateRoomNumber = (): string => {
     return `${Math.floor(100 + Math.random() * 900)}`;
-  };
+  }; 
 
   const calculateTotalPrice = (): number => {
     const roomPrice = roomPrices[roomType] || 0;
@@ -112,6 +113,10 @@ const Booking: React.FC = () => {
     } catch (error) {
       console.error("Error saving booking:", error);
     }
+  };
+
+  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
+    console.log(date);
   };
 
   return (
@@ -193,7 +198,7 @@ const Booking: React.FC = () => {
           <Row gutter={16}>
             <Col span={12}>
               <Space direction="vertical" size={12}>
-                <RangePicker  placeholder={['Checkin', 'Checkout']} />
+                <RangePicker  placeholder={['Checkin', 'Checkout']} onChange={onChange}/>
               </Space>
             </Col>
           </Row>

@@ -1,18 +1,29 @@
 import { Button, Form, Input, Space } from "antd";
+import React, { useEffect } from "react";
+import { useBearStore, useTokenStore } from "../../storage/zustand";
 
 import FooterClient from "../../components/MainLayout/footer";
 import { Header } from "../../components/MainLayout/header";
 import { LoginRequest } from "../../model/authen";
-import React from "react";
 import { useLogin } from "../../query/authen";
 
 const Login: React.FC = () => {
   const [form] = Form.useForm();
   const loginMutation = useLogin();
-
+  const token = useTokenStore();
   const onFinish = (values: LoginRequest) => {
     loginMutation.mutate(values);
   };
+  
+  useEffect(() => {
+    console.log("token: " + token.getState());
+
+
+    
+  }, [loginMutation]);
+
+
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
