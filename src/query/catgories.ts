@@ -1,22 +1,14 @@
+import { Categories } from "../model/categories";
 import axios from "axios";
-import { notification } from "antd";
 import { useQuery } from "react-query";
 
-const api = `https://3586-113-161-37-63.ngrok-free.app`;
+const api = `http://api.thangnq.studio:8080`;
 
-const apiGetallCategories = (): Promise<void> => {
-  return axios.get(`${api}/api/v1/`);
+const apiListCategories = async (): Promise<Categories[]> => {
+    const response = await axios.get(`${api}/api/v1/category`);
+    return response.data.categories; // Đảm bảo rằng đây là một mảng
 };
 
-export const useGetallCategories = () => {
-  return useQuery({
-    queryKey: ["Rooms"],
-    queryFn: () => apiGetallCategories,
-    onError: () => {
-      notification.error({
-        message: "Hiển thị danh mục thất bại",
-        description: "Call api failed!",
-      });
-    },
-  });
+export const useListCategories = () => {
+  return useQuery('categories', apiListCategories);
 };

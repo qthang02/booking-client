@@ -144,8 +144,10 @@ export const Header = () => {
             position: "absolute",
             left: 0,
           }}
+          onClick={() => navigation("/")}
         />
         <span
+          onClick={() => navigation("/")}
           style={{
             color: "#663366",
             fontWeight: "bold",

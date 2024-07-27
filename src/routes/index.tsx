@@ -6,7 +6,7 @@ import Login from "../features/login/login";
 import { MainLayout } from "../components/MainLayout";
 import Payment from "../features/payment/payment";
 import Register from "../features/register/register";
-import RoomList from "../features/Rooms/Rooms";
+import RoomList from "../features/Categories/Categories";
 import UserProfile from "../features/Profile User/ProfileUser";
 
 export const router = createBrowserRouter([
