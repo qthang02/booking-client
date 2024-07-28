@@ -4,8 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import axios from "axios";
 import { notification } from "antd";
-
-const api = `http://api.thangnq.studio:8080`;
+import {API} from "../util/config.tsx";
 
 const instance = axios.create();
 
@@ -23,7 +22,7 @@ instance.interceptors.request.use(
 );
 
 const apiRegister = (req: RegisterRequset): Promise<void> => {
-  return axios.post(`${api}/api/v1/auth/register`, req);
+  return axios.post(`${API}/api/v1/auth/register`, req);
 };
 
 export const useRegister = () => {
@@ -45,7 +44,7 @@ export const useRegister = () => {
 };
 
 const apiLogin = (req: LoginRequest): Promise<LoginResponse> => {
-  return axios.post(`${api}/api/v1/auth/login`, req).then((resp) => resp.data);
+  return axios.post(`${API}/api/v1/auth/login`, req).then((resp) => resp.data);
 };
 
 export const useLogin = () => {
@@ -69,7 +68,7 @@ export const useLogin = () => {
 };
 
 const apiProfile = (): Promise<User> => {
-  return instance.get(`${api}/api/v1/auth/profile`).then((resp) => resp.data);
+  return instance.get(`${API}/api/v1/auth/profile`).then((resp) => resp.data);
 };
 
 export const useGetProfile = () => {
@@ -85,7 +84,7 @@ export const useGetProfile = () => {
 };
 
 const apiUpdateCustomers = (req: UpdateUserRequest): Promise<void> => {
-  return instance.put(`${api}/api/v1/user/${req.id}`, req.user);
+  return instance.put(`${API}/api/v1/user/${req.id}`, req.user);
 };
 
 export const useUpdateCustomer = () => {

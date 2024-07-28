@@ -1,12 +1,10 @@
 import { Categories } from "../model/categories";
 import axios from "axios";
 import { useQuery } from "react-query";
-
-const api = `http://api.thangnq.studio:8080`;
-
+import {API} from "../util/config.tsx";
 
 const apiListCategories = async (): Promise<Categories[]> => {
-    const response = await axios.get(`${api}/api/v1/category`);
+    const response = await axios.get(`${API}/api/v1/category`);
     return response.data.categories; // Đảm bảo rằng đây là một mảng
 };
 
