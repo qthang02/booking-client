@@ -3,9 +3,14 @@ import { notification } from "antd";
 import { useQuery } from "react-query";
 
 const api = `https://3586-113-161-37-63.ngrok-free.app`;
-
+const token = localStorage.getItem("token");
+const instance = axios.create({
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
 const apiGetallBookings = (): Promise<void> => {
-  return axios.get(`${api}/api/v1/`);
+  return instance.get(`${api}/api/v1/`);
 };
 
 export const useGetallBookings = () => {

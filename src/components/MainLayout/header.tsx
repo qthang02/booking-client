@@ -1,15 +1,13 @@
 import { Avatar, Dropdown, MenuProps, Space } from "antd";
 import { MenuOutlined, UserOutlined } from "@ant-design/icons";
-import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHotel } from "@fortawesome/free-solid-svg-icons";
-
-let navigation: NavigateFunction | ((arg0: string) => void);
+import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
-  navigation = useNavigate();
+  const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -20,48 +18,33 @@ export const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsAuthenticated(false);
-    navigation("/login");
+    navigate("/login");
   };
 
   const items: MenuProps["items"] = isAuthenticated
     ? [
         {
-          key: "4",
+          key: "1",
           label: (
-            <span
-              style={{
-                fontSize: "18px",
-                fontWeight: "bolder",
-              }}
-            >
+            <span style={{ fontSize: "18px", fontWeight: "bolder" }}>
               Tài khoản
             </span>
           ),
-          onClick: () => navigation("/profile"),
+          onClick: () => navigate("/profile"),
+        },
+        {
+          key: "2",
+          label: (
+            <span style={{ fontSize: "18px", fontWeight: "bolder" }}>
+              Lịch sử đặt phòng
+            </span>
+          ),
+          onClick: () => navigate("/bookinghistory"),
         },
         {
           key: "3",
           label: (
-            <span
-              style={{
-                fontSize: "18px",
-                fontWeight: "bolder",
-              }}
-            >
-              Lịch sử đặt phòng
-            </span>
-          ),
-          onClick: () => navigation("/bookinghistory"),
-        },
-        {
-          key: "5",
-          label: (
-            <span
-              style={{
-                fontSize: "18px",
-                fontWeight: "bolder",
-              }}
-            >
+            <span style={{ fontSize: "18px", fontWeight: "bolder" }}>
               Đăng xuất
             </span>
           ),
@@ -70,46 +53,31 @@ export const Header = () => {
       ]
     : [
         {
-          key: "4",
+          key: "1",
           label: (
-            <span
-              style={{
-                fontSize: "18px",
-                fontWeight: "bolder",
-              }}
-            >
+            <span style={{ fontSize: "18px", fontWeight: "bolder" }}>
               Trang chủ
             </span>
           ),
-          onClick: () => navigation("/"),
-        },
-        {
-          key: "1",
-          label: (
-            <span
-              style={{
-                fontSize: "18px",
-                fontWeight: "bolder",
-              }}
-            >
-              Đăng ký
-            </span>
-          ),
-          onClick: () => navigation("/register"),
+          onClick: () => navigate("/"),
         },
         {
           key: "2",
           label: (
-            <span
-              style={{
-                fontSize: "18px",
-                fontWeight: "bolder",
-              }}
-            >
+            <span style={{ fontSize: "18px", fontWeight: "bolder" }}>
+              Đăng ký
+            </span>
+          ),
+          onClick: () => navigate("/register"),
+        },
+        {
+          key: "3",
+          label: (
+            <span style={{ fontSize: "18px", fontWeight: "bolder" }}>
               Đăng nhập
             </span>
           ),
-          onClick: () => navigation("/login"),
+          onClick: () => navigate("/login"),
         },
       ];
 
@@ -144,10 +112,10 @@ export const Header = () => {
             position: "absolute",
             left: 0,
           }}
-          onClick={() => navigation("/")}
+          onClick={() => navigate("/")}
         />
         <span
-          onClick={() => navigation("/")}
+          onClick={() => navigate("/")}
           style={{
             color: "#663366",
             fontWeight: "bold",

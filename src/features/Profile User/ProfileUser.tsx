@@ -1,96 +1,72 @@
-import { Button, Card, Form, Input, Spin } from "antd";
+import { Button, Card, Descriptions, Modal, Spin, notification } from "antd";
+import React, { useState } from "react";
 
 import { EditOutlined } from "@ant-design/icons";
 import FooterClient from "../../components/MainLayout/footer";
 import { Header } from "../../components/MainLayout/header";
-import { useGetUserInfo } from "../../query/userinfor";
+import { User } from "../../model/users";
+import UserProfileForm from "./ProfileUserForm";
+import { useGetProfile } from "../../query/authen";
 
 const UserProfile: React.FC = () => {
-  const profile = useGetUserInfo(1);
-  const [form] = Form.useForm();
+  const { data, isLoading, isError, error } = useGetProfile();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  if (profile.isSuccess && profile.data) {
-    form.setFieldsValue(profile);
-    console.log(profile.data);
+  if (isLoading) {
+    return <Spin size="large" />;
   }
 
-  if (profile.isLoading) {
-    return (
-      <div style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
-        <Spin size="large" />
-      </div>
-    );
+  if (isError) {
+    notification.error({
+      message: "Hiển thị thông tin người dùng thất bại",
+      description: (error as Error).message,
+    });
+    return null;
   }
 
-  if (profile.isError) {
-    return (
-      <div style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
-        Error: {profile.error.message}
-      </div>
-    );
-  }
+  const user: User = data as User;
 
-  if (profile.data && profile.data.user) {
-    form.setFieldsValue(profile.data.user);
-  }
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   return (
     <div>
       <Header />
-      <div
-        style={{ display: "flex", justifyContent: "center", padding: "20px" }}
+      <Card
+        title="Thông tin người dùng"
+        bordered={false}
+        style={{ width: 600, margin: "20px auto" }}
+        extra={
+          <Button
+            type="primary"
+            icon={<EditOutlined />}
+            onClick={showModal}
+          >
+            Cập nhật
+          </Button>
+        }
       >
-        <Card
-          title="Thông Tin Tài Khoản"
-          bordered={false}
-          style={{ width: 600, borderRadius: "10px", borderColor: "#663366" }}
-          headStyle={{ backgroundColor: "#663366", color: "#fff" }}
-        >
-          <Form 
-            form={form} 
-            layout="vertical"
-            >
-            <Form.Item
-              name="username"
-              label="Tên người dùng"
-              rules={[{ required: true, message: "Vui lòng nhập tên người dùng!" }]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="phone"
-              label="Số điện thoại"
-              rules={[{ required: true, message: "Vui lòng nhập số điện thoại!" }]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="address"
-              label="Địa chỉ"
-              rules={[{ required: true, message: "Vui lòng nhập địa chỉ!" }]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="email"
-              label="Email"
-              rules={[{ required: true, message: "Vui lòng nhập email!" }]}
-            >
-              <Input />
-            </Form.Item>
-          </Form>
-          <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <Button
-              type="primary"
-              icon={<EditOutlined />}
-              style={{ backgroundColor: "#663366", borderColor: "#663366" }}
-            >
-              Sửa
-            </Button>
-          </div>
-        </Card>
-      </div>
+        <Descriptions bordered column={1}>
+          <Descriptions.Item label="Tên đăng nhập">{user.username}</Descriptions.Item>
+          <Descriptions.Item label="Số điện thoại">{user.phone}</Descriptions.Item>
+          <Descriptions.Item label="Địa chỉ">{user.address}</Descriptions.Item>
+          <Descriptions.Item label="Email">{user.email}</Descriptions.Item>
+        </Descriptions>
+      </Card>
       <FooterClient />
+      <Modal
+        title="Cập nhật thông tin người dùng"
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <UserProfileForm user={user} event="EVT_UPDATE" onClose={handleCancel} />
+      </Modal>
     </div>
   );
 };

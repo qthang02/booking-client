@@ -3,6 +3,8 @@ export interface RegisterRequset {
   password: string;
   phone: string;
   gender: string;
+  address: string;
+  username: string;
 }
 
 export interface LoginRequest {

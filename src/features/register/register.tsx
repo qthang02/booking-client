@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input, Select, Space } from "antd";
+import { Button, Form, Input, Select, Space } from "antd";
 
 import FooterClient from "../../components/MainLayout/footer";
 import { Header } from "../../components/MainLayout/header";
@@ -20,19 +20,10 @@ const Register: React.FC = () => {
         navigate("/login");
       },
       onError: () => {
-        console.log("login Failed");
+        console.log("Đăng ký thất bại");
       },
     });
   };
-
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select style={{ width: 70 }}>
-        <Option value="86">+86</Option>
-        <Option value="87">+87</Option>
-      </Select>
-    </Form.Item>
-  );
 
   return (
     <div>
@@ -64,7 +55,6 @@ const Register: React.FC = () => {
             <Form
               name="register"
               form={form}
-              initialValues={{ prefix: "86" }}
               onFinish={onFinish}
               style={{
                 width: 500,
@@ -74,6 +64,14 @@ const Register: React.FC = () => {
               }}
               scrollToFirstError
             >
+              <Form.Item
+                name="username"
+                label="Tên người dùng"
+                rules={[{ required: true, message: "Vui lòng nhập tên người dùng!" }]}
+              >
+                <Input size="large" />
+              </Form.Item>
+
               <Form.Item
                 name="email"
                 label="E-mail"
@@ -87,7 +85,7 @@ const Register: React.FC = () => {
 
               <Form.Item
                 name="password"
-                label="Password"
+                label="Mật khẩu"
                 rules={[{ required: true, message: "Vui lòng nhập mật khẩu!" }]}
                 hasFeedback
               >
@@ -96,7 +94,7 @@ const Register: React.FC = () => {
 
               <Form.Item
                 name="confirm"
-                label="Confirm Password"
+                label="Xác nhận mật khẩu"
                 dependencies={["password"]}
                 hasFeedback
                 rules={[
@@ -116,45 +114,34 @@ const Register: React.FC = () => {
 
               <Form.Item
                 name="phone"
-                label="Phone Number"
+                label="Số điện thoại"
                 rules={[
                   { required: true, message: "Vui lòng nhập số điện thoại!" },
                 ]}
               >
-                <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
+                <Input size="large" />
               </Form.Item>
 
               <Form.Item
                 name="gender"
-                label="Gender"
+                label="Giới tính"
                 rules={[
                   { required: true, message: "Vui lòng chọn giới tính!" },
                 ]}
               >
                 <Select placeholder="Chọn giới tính" size="large">
-                  <Option value="male">Nam</Option>
-                  <Option value="female">Nữ</Option>
-                  <Option value="other">Khác</Option>
+                  <Option value={true}>Nam</Option>
+                  <Option value={false}>Nữ</Option>
+                 
                 </Select>
               </Form.Item>
 
               <Form.Item
-                name="agreement"
-                valuePropName="checked"
-                rules={[
-                  {
-                    validator: (_, value) =>
-                      value
-                        ? Promise.resolve()
-                        : Promise.reject(
-                            new Error("Bạn phải đồng ý với điều khoản")
-                          ),
-                  },
-                ]}
+                name="address"
+                label="Địa chỉ"
+                rules={[{ required: true, message: "Vui lòng nhập địa chỉ!" }]}
               >
-                <Checkbox>
-                  Tôi đã đọc và đồng ý với <a href="/">điều khoản</a>
-                </Checkbox>
+                <Input size="large" />
               </Form.Item>
 
               <Form.Item style={{ textAlign: "center" }}>
