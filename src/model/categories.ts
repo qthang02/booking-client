@@ -1,3 +1,5 @@
+import {Rooms} from "./rooms.ts";
+
 export interface Categories {
     ID: number;
     name: string;
@@ -6,12 +8,10 @@ export interface Categories {
     price: number;
     available_rooms: number;
     type: string;
-    updated_at: string;
-    created_at: string;
-    deleted_at: string | null;
+    rooms: Rooms[]
   }
   export interface CreateCategoryRequest {
-    category: Categories;
+    categories: Categories;
   }
   
   export interface ListCategoriesResponse {

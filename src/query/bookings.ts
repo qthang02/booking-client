@@ -1,7 +1,9 @@
 import axios from "axios";
-import { notification } from "antd";
-import { useQuery } from "react-query";
 import {API} from "../util/config.tsx";
+import {useMutation, useQuery} from "react-query";
+import {Bookings, ListOrdersResponse} from "../model/bookings.ts";
+import { notification} from "antd";
+import {CreatePaymentResponse} from "../model/payment.ts";
 
 const token = localStorage.getItem("token");
 const instance = axios.create({
@@ -9,19 +11,35 @@ const instance = axios.create({
     Authorization: `Bearer ${token}`,
   },
 });
-const apiGetallBookings = (): Promise<void> => {
-  return instance.get(`${API}/api/v1/`);
+const apiCreateOrder = (req: Bookings): Promise<CreatePaymentResponse> => {
+  return instance.post(`${API}/api/v1/order`, req).then(res => res.data);
 };
 
-export const useGetallBookings = () => {
-  return useQuery({
-    queryKey: ["Bookings"],
-    queryFn: () => apiGetallBookings,
-    onError: () => {
-      notification.error({
-        message: "Hiển thị thông tin đặt phòng thất bại",
-        description: "Call api failed!",
-      });
+export const useCreateOrder = () => {
+  return useMutation({
+    mutationFn: (req: Bookings) => apiCreateOrder(req),
+    onSuccess: (res) => {
+      notification.success({message: "tạo order thành công!"});
+      window.open(res.paymentURL);
+
     },
+    onError: (err: Error) => {
+      notification.error({message: "tạo order thất bại " + err.message})
+    }
+  })
+};
+const apiGetListOrder = (): Promise<ListOrdersResponse> => {
+  return instance.get(`${API}/api/v1/order`).then(res => res.data);
+};
+
+
+export const useGetListOrder = () => {
+  return useQuery('listOrders', apiGetListOrder, {
+    onSuccess: (res) => {
+      notification.success({message: "Lấy danh sách order thành công!"});
+    },
+    onError: (err: Error) => {
+      notification.error({message: "Lấy danh sách order thất bại " + err.message});
+    }
   });
 };

@@ -1,11 +1,10 @@
-import { Button, Card, Drawer, Table, Tag } from "antd";
-import React, { useEffect, useState } from "react";
+import { Button, Card, Drawer, Table, Tag, notification } from "antd";
+import React, { useState, useEffect } from "react";
 
 import FooterClient from "../../components/MainLayout/footer";
 import { Header } from "../../components/MainLayout/header";
-import axios from "axios";
+import {useGetListOrder} from "../../query/bookings.ts";
 
-// import { width } from "@fortawesome/free-solid-svg-icons/fa0";
 
 interface Booking {
   orderId: string;
@@ -43,22 +42,16 @@ const formatDate = (dateString: string) => {
 };
 
 const BookingHistory: React.FC = () => {
-  const [bookings, setBookings] = useState<Booking[]>([]);
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [drawerVisible, setDrawerVisible] = useState(false);
 
-  useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/bookings");
-        setBookings(response.data);
-      } catch (error) {
-        console.error("Error fetching bookings:", error);
-      }
-    };
+  const { data, isLoading, isError } = useGetListOrder();
 
-    fetchBookings();
-  }, []);
+  useEffect(() => {
+    if (isError) {
+      notification.error({ message: "Lấy danh sách order thất bại" });
+    }
+  }, [isError]);
 
   const showDrawer = (booking: Booking) => {
     setSelectedBooking(booking);
@@ -101,7 +94,7 @@ const BookingHistory: React.FC = () => {
       key: "status",
       width: "100px",
       render: (status: Booking["status"]) => (
-        <Tag color={getStatusColor(status)}>{status.toUpperCase()}</Tag>
+          <Tag color={getStatusColor(status)}>{status.toUpperCase()}</Tag>
       ),
     },
     {
@@ -116,141 +109,145 @@ const BookingHistory: React.FC = () => {
       key: "action",
       width: "100px",
       render: (_: string, record: Booking) => (
-        <Button type="primary" onClick={() => showDrawer(record)}>
-          Xem Chi Tiết
-        </Button>
+          <Button type="primary" onClick={() => showDrawer(record)}>
+            Xem Chi Tiết
+          </Button>
       ),
     },
   ];
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div>
-      <Header />
-      <Card>
-        <Table columns={columns} dataSource={bookings} rowKey="orderId" />
-        <Drawer
-          title="Chi Tiết Đơn Hàng"
-          onClose={onClose}
-          open={drawerVisible}
-          style={{ paddingBottom: 80 }}
-          bodyStyle={{ padding: "0", backgroundColor: "#f9f9f9" }}
-        >
-          {selectedBooking && (
-            <div style={{ color: "#663366" }}>
-              <div
-                style={{
-                  textAlign: "center",
-                  marginBottom: "24px",
-                  fontSize: "24px",
-                  fontWeight: "bold",
-                  border: "2px solid #663366",  
-                  borderRadius: "8px",
-                }}
-              >
-                Mã Đơn Hàng: {selectedBooking.orderId}
-              </div>
-              <div
-                style={{
-                  border: "2px solid #663366",
-                  borderRadius: "8px",
-                  marginBottom: "16px",
-                }}
-              >
-                <strong>Số Phòng:</strong> {selectedBooking.roomNumber}
-              </div>
-              <div
-                style={{
-                  border: "2px solid #663366",
-                  borderRadius: "8px",
-                  marginBottom: "16px",
-                }}
-              >
-                <strong>Số Người:</strong> {selectedBooking.guestNumber}
-              </div>
-              <div
-                style={{
-                  border: "2px solid #663366",
-                  borderRadius: "8px",
-                  marginBottom: "16px",
-                }}
-              >
-                <strong>Loại Phòng:</strong> {selectedBooking.roomType}
-              </div>
-              <div
-                style={{
-                  border: "2px solid #663366",
-                  borderRadius: "8px",
-                  marginBottom: "16px",
-                }}
-              >
-                <strong>Các Dịch Vụ:</strong>{" "}
-                {selectedBooking.services.join(", ")}
-              </div>
-              <div
-                style={{
-                  border: "2px solid #663366",
-                  borderRadius: "8px",
-                  marginBottom: "16px",
-                }}
-              >
-                <strong>Đỗ Xe Ô Tô:</strong>{" "}
-                {selectedBooking.parkingOption === "yes" ? "Có" : "Không"}
-              </div>
-              <div
-                style={{
-                  border: "2px solid #663366",
-                  borderRadius: "8px",
-                  marginBottom: "16px",
-                }}
-              >
-                <strong>Thời Gian:</strong> {selectedBooking.time} ngày
-              </div>
-              <div
-                style={{
-                  border: "2px solid #663366",
-                  borderRadius: "8px",
-                  marginBottom: "16px",
-                }}
-              >
-                <strong>Ghi Chú:</strong> {selectedBooking.description}
-              </div>
-              <div
-                style={{
-                  border: "2px solid #663366",
-                  borderRadius: "8px",
-                  marginBottom: "16px",
-                }}
-              >
-                <strong>Trạng Thái:</strong>{" "}
-                <Tag color={getStatusColor(selectedBooking.status)}>
-                  {selectedBooking.status.toUpperCase()}
-                </Tag>
-              </div>
-              <div
-                style={{
-                  border: "2px solid #663366",
-                  borderRadius: "8px",
-                  marginBottom: "16px",
-                }}
-              >
-                <strong>Tổng Tiền:</strong> {selectedBooking.totalPrice} $
-              </div>
-              <div
-                style={{
-                  border: "2px solid #663366",
-                  borderRadius: "8px",
-                  marginBottom: "16px",
-                }}
-              >
-                <strong>Ngày Đặt:</strong>{" "}
-                {formatDate(selectedBooking.bookingDate)}
-              </div>
-            </div>
-          )}
-        </Drawer>
-      </Card>
-      <FooterClient />
-    </div>
+      <div>
+        <Header />
+        <Card>
+          <Table columns={columns} dataSource={data?.order || []} rowKey="orderId" />
+          <Drawer
+              title="Chi Tiết Đơn Hàng"
+              onClose={onClose}
+              open={drawerVisible}
+              style={{ paddingBottom: 80 }}
+              bodyStyle={{ padding: "0", backgroundColor: "#f9f9f9" }}
+          >
+            {selectedBooking && (
+                <div style={{ color: "#663366" }}>
+                  <div
+                      style={{
+                        textAlign: "center",
+                        marginBottom: "24px",
+                        fontSize: "24px",
+                        fontWeight: "bold",
+                        border: "2px solid #663366",
+                        borderRadius: "8px",
+                      }}
+                  >
+                    Mã Đơn Hàng: {selectedBooking.orderId}
+                  </div>
+                  <div
+                      style={{
+                        border: "2px solid #663366",
+                        borderRadius: "8px",
+                        marginBottom: "16px",
+                      }}
+                  >
+                    <strong>Số Phòng:</strong> {selectedBooking.roomNumber}
+                  </div>
+                  <div
+                      style={{
+                        border: "2px solid #663366",
+                        borderRadius: "8px",
+                        marginBottom: "16px",
+                      }}
+                  >
+                    <strong>Số Người:</strong> {selectedBooking.guestNumber}
+                  </div>
+                  <div
+                      style={{
+                        border: "2px solid #663366",
+                        borderRadius: "8px",
+                        marginBottom: "16px",
+                      }}
+                  >
+                    <strong>Loại Phòng:</strong> {selectedBooking.roomType}
+                  </div>
+                  <div
+                      style={{
+                        border: "2px solid #663366",
+                        borderRadius: "8px",
+                        marginBottom: "16px",
+                      }}
+                  >
+                    <strong>Các Dịch Vụ:</strong>{" "}
+                    {selectedBooking.services.join(", ")}
+                  </div>
+                  <div
+                      style={{
+                        border: "2px solid #663366",
+                        borderRadius: "8px",
+                        marginBottom: "16px",
+                      }}
+                  >
+                    <strong>Đỗ Xe Ô Tô:</strong>{" "}
+                    {selectedBooking.parkingOption === "yes" ? "Có" : "Không"}
+                  </div>
+                  <div
+                      style={{
+                        border: "2px solid #663366",
+                        borderRadius: "8px",
+                        marginBottom: "16px",
+                      }}
+                  >
+                    <strong>Thời Gian:</strong> {selectedBooking.time} ngày
+                  </div>
+                  <div
+                      style={{
+                        border: "2px solid #663366",
+                        borderRadius: "8px",
+                        marginBottom: "16px",
+                      }}
+                  >
+                    <strong>Ghi Chú:</strong> {selectedBooking.description}
+                  </div>
+                  <div
+                      style={{
+                        border: "2px solid #663366",
+                        borderRadius: "8px",
+                        marginBottom: "16px",
+                      }}
+                  >
+                    <strong>Trạng Thái:</strong>{" "}
+                    <Tag color={getStatusColor(selectedBooking.status)}>
+                      {selectedBooking.status.toUpperCase()}
+                    </Tag>
+                  </div>
+                  <div
+                      style={{
+                        border: "2px solid #663366",
+                        borderRadius: "8px",
+                        marginBottom: "16px",
+                      }}
+                  >
+                    <strong>Tổng Tiền:</strong> {selectedBooking.totalPrice} $
+                  </div>
+                  <div
+                      style={{
+                        border: "2px solid #663366",
+                        borderRadius: "8px",
+                        marginBottom: "16px",
+                      }}
+                  >
+                    <strong>Ngày Đặt:</strong>{" "}
+                    {formatDate(selectedBooking.bookingDate)}
+                  </div>
+                </div>
+            )}
+          </Drawer>
+        </Card>
+        <FooterClient />
+      </div>
   );
 };
 

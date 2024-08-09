@@ -8,6 +8,7 @@ import Payment from "../features/payment/payment";
 import Register from "../features/register/register";
 import RoomList from "../features/Categories/Categories";
 import UserProfile from "../features/Profile User/ProfileUser";
+import StatusPayment from "../features/payment/StatusPayment.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
   {
     path: "/profile",
     element: <UserProfile />,
+  },
+  {
+    path: "/status-payment",
+    element: <StatusPayment />,
   },
   {
     path: "*",
