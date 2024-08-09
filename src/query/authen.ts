@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import axios from "axios";
 import { notification } from "antd";
-import {API} from "../util/config.tsx";
+import {API} from "../config/config.ts";
 
 const instance = axios.create();
 

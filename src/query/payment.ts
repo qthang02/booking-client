@@ -1,8 +1,8 @@
 import axios from "axios";
-import {API} from "../util/config.tsx";
 import {useQuery} from "react-query";
 import { notification} from "antd";
 import {CreatePaymentResponse} from "../model/payment.ts";
+import {API} from "../config/config.ts";
 
 const token = localStorage.getItem("token");
 const instance = axios.create({

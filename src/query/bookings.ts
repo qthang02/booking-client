@@ -1,9 +1,9 @@
 import axios from "axios";
-import {API} from "../util/config.tsx";
 import {useMutation, useQuery} from "react-query";
 import {Bookings, ListOrdersResponse} from "../model/bookings.ts";
 import { notification} from "antd";
 import {CreatePaymentResponse} from "../model/payment.ts";
+import {API} from "../config/config.ts";
 
 const token = localStorage.getItem("token");
 const instance = axios.create({
@@ -35,7 +35,7 @@ const apiGetListOrder = (): Promise<ListOrdersResponse> => {
 
 export const useGetListOrder = () => {
   return useQuery('listOrders', apiGetListOrder, {
-    onSuccess: (res) => {
+    onSuccess: () => {
       notification.success({message: "Lấy danh sách order thành công!"});
     },
     onError: (err: Error) => {
