@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { EditOutlined } from "@ant-design/icons";
 import FooterClient from "../../components/MainLayout/footer";
 import { Header } from "../../components/MainLayout/header";
-import { User } from "../../model/users";
+import { User } from "../../model/profile.ts";
 import UserProfileForm from "./ProfileUserForm";
-import { useGetProfile } from "../../query/authen";
+import { useGetProfile } from "../../query/profile.ts";
 
 const UserProfile: React.FC = () => {
   const { data, isLoading, isError, error } = useGetProfile();

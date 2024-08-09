@@ -1,9 +1,9 @@
 import { Button, Form, Input } from "antd";
 
 import { EventClick } from "../../util/type";
-import { User } from "../../model/users";
+import { User } from "../../model/profile.ts";
 import { useEffect } from "react";
-import { useUpdateCustomer } from "../../query/authen";
+import { useUpdateCustomer } from "../../query/profile.ts";
 
 export const UserProfileForm = (props: { user: User | undefined, event: EventClick, onClose: () => void }) => {
   const [form] = Form.useForm();

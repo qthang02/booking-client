@@ -7,7 +7,7 @@ import { useListCategories } from "../../query/catgories";
 import {Categories} from "../../model/categories.ts";
 import {useForm} from "antd/es/form/Form";
 import {Rooms} from "../../model/rooms.ts";
-import {useGetProfile} from "../../query/authen.ts";
+import {useGetProfile} from "../../query/profile.ts";
 import {useCreateOrder} from "../../query/bookings.ts";
 import axios from "axios";
 
