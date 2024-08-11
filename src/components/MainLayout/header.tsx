@@ -2,21 +2,21 @@ import { Avatar, Dropdown, MenuProps, Space } from "antd";
 import { MenuOutlined, UserOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHotel } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import {useAuthStore} from "../../store/auth.ts";
 
 export const Header = () => {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const setAuthToken = useAuthStore((state) => state.setAuthToken);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+      const token = useAuthStore.getState().authToken;
     setIsAuthenticated(!!token);
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    setAuthToken(undefined);
     setIsAuthenticated(false);
     navigate("/login");
   };
@@ -95,45 +95,22 @@ export const Header = () => {
         padding: "0 20px",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          position: "relative",
-          left: "50px",
-        }}
-      >
-        <FontAwesomeIcon
-          icon={faHotel}
-          style={{
-            fontSize: "50px",
-            color: "#663366",
-            opacity: 0.2,
-            position: "absolute",
-            left: 0,
-          }}
-          onClick={() => navigate("/")}
-        />
-        <span
-          onClick={() => navigate("/")}
-          style={{
-            color: "#663366",
-            fontWeight: "bold",
-            fontSize: "xx-large",
-            whiteSpace: "nowrap",
-            position: "relative",
-            left: "10px",
-            backgroundColor: "#FFFFFF",
-            fontFamily: "'Roboto', sans-serif",
-          }}
+        <div
+            style={{
+                display: "flex",
+                alignItems: "center",
+                position: "relative",
+                left: "50px",
+                cursor: "pointer"
+            }}
+            onClick={() => navigate("/")}
         >
-          Shelby Hotel
-        </span>
-      </div>
+            <img src="https://gleam.run/images/lucy/lucy.svg" alt="logo" width="70px" height="70px"/>
+        </div>
 
-      <div style={{ marginLeft: "-20px" }}>
+        <div style={{marginLeft: "-20px"}}>
         <span
-          style={{
+            style={{
             color: "#663366",
             fontWeight: "bold",
             fontSize: "large",

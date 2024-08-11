@@ -5,30 +5,13 @@ import { Header } from "../../components/MainLayout/header";
 import { LoginRequest } from "../../model/authen";
 import React from "react";
 import { useLogin } from "../../query/authen";
-import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [form] = Form.useForm();
   const loginMutation = useLogin();
-  const navigate = useNavigate();
 
   const onFinish = (values: LoginRequest) => {
-    loginMutation.mutate(values, {
-      onSuccess: (response) => {
-        // Giả sử API trả về một đối tượng có thuộc tính token
-        const token  = response.token;
-        console.log(response.token)
-        // Lưu token và trạng thái đăng nhập vào localStorage
-        localStorage.setItem("token", token);
-        localStorage.setItem("isLoggedIn", "true");
-        // Chuyển trang sau khi đăng nhập thành công
-        navigate('/');
-      },
-      onError: (error) => {
-        // Xử lý lỗi đăng nhập
-        console.error("Login failed:", error);
-      },
-    });
+    loginMutation.mutate(values);
   };
   
   return (
