@@ -6,7 +6,6 @@ import {
   TwitterOutlined,
 } from "@ant-design/icons";
 
-import Cskhbutton from "./CSKH.drawer.tsx";
 import FooterClient from "./footer.tsx";
 import { Header } from "./header.tsx";
 import React from "react";
@@ -60,16 +59,14 @@ const socialIconStyle: React.CSSProperties = {
 };
 
 export const MainLayout = () => {
-  const navigate = useNavigate(); // Hook để điều hướng trong React Router
+  const navigate = useNavigate();
 
-  // Hàm xử lý khi click vào nút "Loại Phòng"
   const handleRoomButtonClick = () => {
-    navigate("/categories"); // Điều hướng đến đường dẫn /rooms
+    navigate("/categories");
   };
 
-  // Hàm xử lý khi click vào nút "About Us"
   const handleAboutUsButtonClick = () => {
-    navigate("/about-us"); // Điều hướng đến đường dẫn /about-us
+    navigate("/about-us");
   };
 
   return (
@@ -122,7 +119,6 @@ export const MainLayout = () => {
             padding: "20px 0",
           }}
         >
-          <Cskhbutton />
           <Button
             style={buttonStyle}
             size="large"

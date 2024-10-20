@@ -1,11 +1,12 @@
 import { ListCategoriesResponse} from "../model/categories";
-import axios from "axios";
 import { useQuery } from "react-query";
-import {API} from "../util/config.tsx";
+import {API_URL} from "../config/config.ts";
+import axios from "../util/axios.ts";
+
 
 const apiListCategories = async (): Promise<ListCategoriesResponse> => {
-    const response = await axios.get(`${API}/api/v1/category`);
-    return response.data.categories; // Đảm bảo rằng đây là một mảng
+    const response = await axios.get(`${API_URL}/api/v1/category`);
+    return response.data.categories;
 };
 
 export const useListCategories = () => {

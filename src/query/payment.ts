@@ -1,18 +1,11 @@
-import axios from "axios";
-import {API} from "../util/config.tsx";
 import {useQuery} from "react-query";
 import { notification} from "antd";
 import {CreatePaymentResponse} from "../model/payment.ts";
-
-const token = localStorage.getItem("token");
-const instance = axios.create({
-    headers: {
-        Authorization: `Bearer ${token}`,
-    },
-});
+import {API_URL} from "../config/config.ts";
+import axios from "../util/axios.ts";
 
 const apiCreatePayment = (amount: number, orderInfo: string): Promise<CreatePaymentResponse> => {
-    return instance.get(`${API}/api/v1/payment/create-payment`, {
+    return axios.get(`${API_URL}/api/v1/payment/create-payment`, {
         params: {amount, orderInfo}
     }).then(res => res.data);
 };

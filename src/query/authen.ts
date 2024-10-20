@@ -1,28 +1,16 @@
 import { LoginRequest, LoginResponse, RegisterRequset } from "../model/authen";
-import { UpdateUserRequest, User } from "../model/users";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-
-import axios from "axios";
+import { useMutation } from "react-query";
 import { notification } from "antd";
-import {API} from "../util/config.tsx";
-
-const instance = axios.create();
-
-instance.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+import {API_URL} from "../config/config.ts";
+import axios from "../util/axios.ts";
+import {useAuthStore} from "../store/auth.ts";
 
 const apiRegister = (req: RegisterRequset): Promise<void> => {
-  return axios.post(`${API}/api/v1/auth/register`, req);
+  return axios.post(`${API_URL}/api/v1/auth/register`, req);
+};
+
+const apiLogin = (req: LoginRequest): Promise<LoginResponse> => {
+  return axios.post(`${API_URL}/api/v1/auth/login`, req);
 };
 
 export const useRegister = () => {
@@ -31,23 +19,19 @@ export const useRegister = () => {
     onSuccess: () => {
       notification.success({
         message: "Đăng kí thành công!",
-        description: "Call api success!",
       });
     },
     onError: () => {
       notification.error({
         message: "Đăng kí thất bại!",
-        description: "Call api failed!",
       });
     },
   });
 };
 
-const apiLogin = (req: LoginRequest): Promise<LoginResponse> => {
-  return axios.post(`${API}/api/v1/auth/login`, req).then((resp) => resp.data);
-};
-
 export const useLogin = () => {
+  const setAuthToken = useAuthStore((state) => state.setAuthToken);
+
   return useMutation({
     mutationFn: (req: LoginRequest) => apiLogin(req),
     onSuccess: (resp: LoginResponse) => {
@@ -56,50 +40,12 @@ export const useLogin = () => {
       });
 
       if (resp.token) {
-        localStorage.setItem("token", resp.token);
+        setAuthToken(resp.token);
       }
     },
     onError: () => {
       notification.error({
         message: "Đăng nhập thất bại!",
-      });
-    },
-  });
-};
-
-const apiProfile = (): Promise<User> => {
-  return instance.get(`${API}/api/v1/auth/profile`).then((resp) => resp.data);
-};
-
-export const useGetProfile = () => {
-  return useQuery({
-    queryKey: ["profiles"],
-    queryFn: () => apiProfile(),
-    onError: (error: Error) => {
-      notification.error({
-        message: "Hiển thị thông tin người dùng thất bại: " + error.message,
-      });
-    },
-  });
-};
-
-const apiUpdateCustomers = (req: UpdateUserRequest): Promise<void> => {
-  return instance.put(`${API}/api/v1/user/${req.id}`, req.user);
-};
-
-export const useUpdateCustomer = () => {
-  const client= useQueryClient();
-  return useMutation({
-    mutationFn: (req: UpdateUserRequest) => apiUpdateCustomers(req),
-    onSuccess: () => {
-      notification.success({
-        message: "Cập nhật thông tin người dùng thành công!",
-      });
-      client.invalidateQueries("profiles");
-    },
-    onError: (error: Error) => {
-      notification.error({
-        message: "Cập nhật thông tin người dùng thất bại: " + error.message,
       });
     },
   });
