@@ -1,4 +1,4 @@
-import {Button, Card, Col, DatePicker, Drawer, Form, Input, InputNumber, message, Row, Select, Spin} from "antd";
+import {Button, Card, Col, DatePicker, Drawer, Form, Input, InputNumber, message, Row, Select} from "antd";
 
 import FooterClient from "../../components/MainLayout/footer";
 import { Header } from "../../components/MainLayout/header";
@@ -14,7 +14,7 @@ import axios from "axios";
 const { Meta } = Card;
 
 const RoomList: React.FC = () => {
-  const { data: categories, isLoading, isError } = useListCategories();
+  const listCategories = useListCategories();
   const [open, setOpen] = useState(false);
   const [form] = useForm();
   const [category, setCategory] = useState<Categories>();
@@ -27,17 +27,6 @@ const RoomList: React.FC = () => {
       form.resetFields();
   };
 
-  if (isLoading) {
-    return <Spin />;
-  }
-
-  if (isError) {
-    return <div>Đã có lỗi xảy ra khi tải danh sách categories.</div>;
-  }
-
-  if (!categories || !Array.isArray(categories)) {
-    return <div>Không có danh mục nào để hiển thị.</div>;
-  }
 
   const handleOrder = (category: Categories) => {
       setCategory(category);
@@ -122,7 +111,7 @@ const RoomList: React.FC = () => {
       <Header />
       <div style={{ background: "#ECECEC", padding: "30px" }}>
         <Row gutter={[16, 16]}>
-          {categories.map((category) => (
+          {listCategories.data?.categories.map((category) => (
             <Col span={8} key={category.ID}>
               <Card
                 hoverable

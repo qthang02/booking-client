@@ -5,8 +5,7 @@ import axios from "../util/axios.ts";
 
 
 const apiListCategories = async (): Promise<ListCategoriesResponse> => {
-    const response = await axios.get(`${API_URL}/api/v1/category`);
-    return response.data.categories;
+    return await axios.get(`${API_URL}/api/v1/category`);
 };
 
 export const useListCategories = () => {
