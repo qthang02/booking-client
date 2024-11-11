@@ -1,10 +1,10 @@
-import { Button, Form, Input, Space } from "antd";
+import { Button, Form, Input, Space } from 'antd';
 
-import FooterClient from "../../components/MainLayout/footer";
-import { Header } from "../../components/MainLayout/header";
-import { LoginRequest } from "../../model/authen";
-import React from "react";
-import { useLogin } from "../../query/authen";
+import LayoutFooter from '../../components/MainLayout/footer';
+import { LayoutHeader } from '../../components/MainLayout/layoutHeader.tsx';
+import { LoginRequest } from '../../model/authen';
+import React from 'react';
+import { useLogin } from '../../query/authen';
 
 const Login: React.FC = () => {
   const [form] = Form.useForm();
@@ -13,28 +13,28 @@ const Login: React.FC = () => {
   const onFinish = (values: LoginRequest) => {
     loginMutation.mutate(values);
   };
-  
+
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <LayoutHeader />
       <h1
         style={{
-          textAlign: "center",
-          marginBottom: "20px",
-          color: "#663366",
-          fontWeight: "bold",
-          fontSize: "xx-large",
-          marginTop: "20px",
+          textAlign: 'center',
+          marginBottom: '20px',
+          color: '#663366',
+          fontWeight: 'bold',
+          fontSize: 'xx-large',
+          marginTop: '20px',
         }}
       >
         Đăng Nhập
       </h1>
       <div
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "60vh",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '60vh',
         }}
       >
         <Space direction="vertical" size="large">
@@ -42,14 +42,14 @@ const Login: React.FC = () => {
             name="login"
             form={form}
             onFinish={onFinish}
-            style={{ width: 500, padding: "20px", borderRadius: "5px" }}
+            style={{ width: 500, padding: '20px', borderRadius: '5px' }}
           >
             <Form.Item
               name="email"
               label="E-mail"
               rules={[
-                { type: "email", message: "The input is not valid E-mail!" },
-                { required: true, message: "Please input your E-mail!" },
+                { type: 'email', message: 'The input is not valid E-mail!' },
+                { required: true, message: 'Please input your E-mail!' },
               ]}
             >
               <Input size="large" />
@@ -59,18 +59,18 @@ const Login: React.FC = () => {
               name="password"
               label="Password"
               rules={[
-                { required: true, message: "Please input your password!" },
+                { required: true, message: 'Please input your password!' },
               ]}
             >
               <Input.Password size="large" />
             </Form.Item>
 
-            <Form.Item style={{ textAlign: "center" }}>
+            <Form.Item style={{ textAlign: 'center' }}>
               <Button
                 type="primary"
                 htmlType="submit"
                 size="large"
-                style={{ backgroundColor: "#663366", borderColor: "#663366" }}
+                style={{ backgroundColor: '#663366', borderColor: '#663366' }}
               >
                 Sign In
               </Button>
@@ -78,7 +78,7 @@ const Login: React.FC = () => {
           </Form>
         </Space>
       </div>
-      <FooterClient />
+      <LayoutFooter />
     </div>
   );
 };

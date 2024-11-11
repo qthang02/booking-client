@@ -1,12 +1,12 @@
-import { Button, Card, Descriptions, Modal, Spin, notification } from "antd";
-import React, { useState } from "react";
+import { Button, Card, Descriptions, Modal, Spin, notification } from 'antd';
+import React, { useState } from 'react';
 
-import { EditOutlined } from "@ant-design/icons";
-import FooterClient from "../../components/MainLayout/footer";
-import { Header } from "../../components/MainLayout/header";
-import { User } from "../../model/profile.ts";
-import UserProfileForm from "./ProfileUserForm";
-import { useGetProfile } from "../../query/profile.ts";
+import { EditOutlined } from '@ant-design/icons';
+import LayoutFooter from '../../components/MainLayout/footer';
+import { LayoutHeader } from '../../components/MainLayout/layoutHeader.tsx';
+import { User } from '../../model/profile.ts';
+import UserProfileForm from './ProfileUserForm';
+import { useGetProfile } from '../../query/profile.ts';
 
 const UserProfile: React.FC = () => {
   const { data, isLoading, isError, error } = useGetProfile();
@@ -18,7 +18,7 @@ const UserProfile: React.FC = () => {
 
   if (isError) {
     notification.error({
-      message: "Hiển thị thông tin người dùng thất bại",
+      message: 'Hiển thị thông tin người dùng thất bại',
       description: (error as Error).message,
     });
     return null;
@@ -36,11 +36,11 @@ const UserProfile: React.FC = () => {
 
   return (
     <div>
-      <Header />
+      <LayoutHeader />
       <Card
         title="Thông tin người dùng"
         bordered={false}
-        style={{ width: 600, margin: "20px auto" }}
+        style={{ width: 600, margin: '20px auto' }}
         extra={
           <Button
             type="primary"
@@ -58,7 +58,7 @@ const UserProfile: React.FC = () => {
           <Descriptions.Item label="Email">{user.email}</Descriptions.Item>
         </Descriptions>
       </Card>
-      <FooterClient />
+      <LayoutFooter />
       <Modal
         title="Cập nhật thông tin người dùng"
         visible={isModalVisible}

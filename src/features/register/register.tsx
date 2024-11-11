@@ -1,11 +1,11 @@
-import { Button, Form, Input, Select, Space } from "antd";
+import { Button, Form, Input, Select, Space } from 'antd';
 
-import FooterClient from "../../components/MainLayout/footer";
-import { Header } from "../../components/MainLayout/header";
-import React from "react";
-import { RegisterRequset } from "../../model/authen";
-import { useNavigate } from "react-router-dom";
-import { useRegister } from "../../query/authen";
+import LayoutFooter from '../../components/MainLayout/footer';
+import { LayoutHeader } from '../../components/MainLayout/layoutHeader.tsx';
+import React from 'react';
+import { RegisterRequset } from '../../model/authen';
+import { useNavigate } from 'react-router-dom';
+import { useRegister } from '../../query/authen';
 
 const { Option } = Select;
 
@@ -17,27 +17,27 @@ const Register: React.FC = () => {
   const onFinish = (values: RegisterRequset) => {
     registerMutation.mutate(values, {
       onSuccess: () => {
-        navigate("/login");
+        navigate('/login');
       },
       onError: () => {
-        console.log("Đăng ký thất bại");
+        console.log('Đăng ký thất bại');
       },
     });
   };
 
   return (
     <div>
-      <Header />
+      <LayoutHeader />
       <div className="flex flex-col min-h-screen">
         <div>
           <h1
             style={{
-              textAlign: "center",
-              marginBottom: "20px",
-              color: "#663366",
-              fontWeight: "bold",
-              fontSize: "xx-large",
-              marginTop: "20px",
+              textAlign: 'center',
+              marginBottom: '20px',
+              color: '#663366',
+              fontWeight: 'bold',
+              fontSize: 'xx-large',
+              marginTop: '20px',
             }}
           >
             Đăng Ký
@@ -45,10 +45,10 @@ const Register: React.FC = () => {
         </div>
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            minHeight: "100vh",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '100vh',
           }}
         >
           <Space direction="vertical" size="large">
@@ -58,16 +58,16 @@ const Register: React.FC = () => {
               onFinish={onFinish}
               style={{
                 width: 500,
-                padding: "20px",
-                border: "1px solid #e8e8e8",
-                borderRadius: "5px",
+                padding: '20px',
+                border: '1px solid #e8e8e8',
+                borderRadius: '5px',
               }}
               scrollToFirstError
             >
               <Form.Item
                 name="username"
                 label="Tên người dùng"
-                rules={[{ required: true, message: "Vui lòng nhập tên người dùng!" }]}
+                rules={[{ required: true, message: 'Vui lòng nhập tên người dùng!' }]}
               >
                 <Input size="large" />
               </Form.Item>
@@ -76,8 +76,8 @@ const Register: React.FC = () => {
                 name="email"
                 label="E-mail"
                 rules={[
-                  { type: "email", message: "Địa chỉ email không hợp lệ!" },
-                  { required: true, message: "Vui lòng nhập email!" },
+                  { type: 'email', message: 'Địa chỉ email không hợp lệ!' },
+                  { required: true, message: 'Vui lòng nhập email!' },
                 ]}
               >
                 <Input size="large" />
@@ -86,7 +86,7 @@ const Register: React.FC = () => {
               <Form.Item
                 name="password"
                 label="Mật khẩu"
-                rules={[{ required: true, message: "Vui lòng nhập mật khẩu!" }]}
+                rules={[{ required: true, message: 'Vui lòng nhập mật khẩu!' }]}
                 hasFeedback
               >
                 <Input.Password size="large" />
@@ -95,16 +95,16 @@ const Register: React.FC = () => {
               <Form.Item
                 name="confirm"
                 label="Xác nhận mật khẩu"
-                dependencies={["password"]}
+                dependencies={['password']}
                 hasFeedback
                 rules={[
-                  { required: true, message: "Vui lòng xác nhận mật khẩu!" },
+                  { required: true, message: 'Vui lòng xác nhận mật khẩu!' },
                   ({ getFieldValue }) => ({
                     validator(_, value) {
-                      if (!value || getFieldValue("password") === value) {
+                      if (!value || getFieldValue('password') === value) {
                         return Promise.resolve();
                       }
-                      return Promise.reject(new Error("Mật khẩu không khớp!"));
+                      return Promise.reject(new Error('Mật khẩu không khớp!'));
                     },
                   }),
                 ]}
@@ -116,7 +116,7 @@ const Register: React.FC = () => {
                 name="phone"
                 label="Số điện thoại"
                 rules={[
-                  { required: true, message: "Vui lòng nhập số điện thoại!" },
+                  { required: true, message: 'Vui lòng nhập số điện thoại!' },
                 ]}
               >
                 <Input size="large" />
@@ -126,30 +126,30 @@ const Register: React.FC = () => {
                 name="gender"
                 label="Giới tính"
                 rules={[
-                  { required: true, message: "Vui lòng chọn giới tính!" },
+                  { required: true, message: 'Vui lòng chọn giới tính!' },
                 ]}
               >
                 <Select placeholder="Chọn giới tính" size="large">
                   <Option value={true}>Nam</Option>
                   <Option value={false}>Nữ</Option>
-                 
+
                 </Select>
               </Form.Item>
 
               <Form.Item
                 name="address"
                 label="Địa chỉ"
-                rules={[{ required: true, message: "Vui lòng nhập địa chỉ!" }]}
+                rules={[{ required: true, message: 'Vui lòng nhập địa chỉ!' }]}
               >
                 <Input size="large" />
               </Form.Item>
 
-              <Form.Item style={{ textAlign: "center" }}>
+              <Form.Item style={{ textAlign: 'center' }}>
                 <Button
                   type="primary"
                   htmlType="submit"
                   size="large"
-                  style={{ backgroundColor: "#663366", borderColor: "#663366" }}
+                  style={{ backgroundColor: '#663366', borderColor: '#663366' }}
                 >
                   Đăng Ký
                 </Button>
@@ -158,7 +158,7 @@ const Register: React.FC = () => {
           </Space>
         </div>
       </div>
-      <FooterClient />
+      <LayoutFooter />
     </div>
   );
 };

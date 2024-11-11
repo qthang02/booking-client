@@ -1,9 +1,9 @@
-import { Card, Col, Image, Layout, Row, Typography } from "antd";
-import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
+import { Card, Col, Image, Layout, Row, Typography } from 'antd';
+import { MailOutlined, PhoneOutlined } from '@ant-design/icons';
 
-import FooterClient from "../../components/MainLayout/footer";
-import { Header } from "../../components/MainLayout/header";
-import React from "react";
+import LayoutFooter from '../../components/MainLayout/footer';
+import { LayoutHeader } from '../../components/MainLayout/layoutHeader.tsx';
+import React from 'react';
 
 const { Content } = Layout;
 const { Title, Paragraph, Text } = Typography;
@@ -29,17 +29,17 @@ const imageStyle: React.CSSProperties = {
 const AboutUs: React.FC = () => {
   return (
     <Layout>
-      <Header />
-      <Content style={{ padding: "0 50px", backgroundColor: "#f0f2f5" }}>
+      <LayoutHeader />
+      <Content style={{ padding: '0 50px', backgroundColor: '#f0f2f5' }}>
         <div
           style={{
-            backgroundColor: "#fff",
+            backgroundColor: '#fff',
             padding: 24,
             minHeight: 380,
             marginTop: 24,
           }}
         >
-          <Title level={2} style={{ color: "#663366" }}>
+          <Title level={2} style={{ color: '#663366' }}>
             Welcome to Shelby Hotel
           </Title>
           <Paragraph>
@@ -50,7 +50,7 @@ const AboutUs: React.FC = () => {
             travelers.
           </Paragraph>
 
-          <Title level={3} style={{ color: "#663366" }}>
+          <Title level={3} style={{ color: '#663366' }}>
             Our Vision
           </Title>
           <Paragraph>
@@ -60,7 +60,7 @@ const AboutUs: React.FC = () => {
             innovation, and sustainability.
           </Paragraph>
 
-          <Title level={3} style={{ color: "#663366" }}>
+          <Title level={3} style={{ color: '#663366' }}>
             Our Mission
           </Title>
           <Paragraph>
@@ -144,7 +144,7 @@ const AboutUs: React.FC = () => {
           </Row>
         </div>
       </Content>
-      <FooterClient />
+      <LayoutFooter />
     </Layout>
   );
 };
