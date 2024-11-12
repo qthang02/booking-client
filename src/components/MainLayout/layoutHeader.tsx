@@ -1,15 +1,7 @@
-// layoutHeader.tsx
-import { Layout, Menu, MenuProps, Typography, DatePicker, InputNumber, Button } from 'antd';
+import { Layout, Menu, MenuProps, Typography, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const StyledHeader = styled(Layout.Header)`
-  background: transparent;
-  position: absolute;
-  width: 100%;
-  z-index: 1;
-  padding: 0 50px;
-`;
 
 const StyledButton = styled(Button)`
   background: transparent;
@@ -38,56 +30,6 @@ const StyledButton = styled(Button)`
 `;
 
 
-const HeroSection = styled.div`
-  height: 100vh;
-  position: relative;
-  background-image: url('https://www.trailsofindochina.com/wp-content/uploads/2017/05/hochiminhcity_header.jpg');
-  background-size: cover;
-  background-position: center;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-  }
-`;
-
-const BookingForm = styled.div`
-  position: absolute;
-  bottom: 350px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-  border-radius: 8px;
-  display: flex;
-  gap: 10px;
-`;
-
-const HeroContent = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: white;
-  
-  h1 {
-    font-size: 48px;
-    color: white;
-    margin-bottom: 20px;
-  }
-  
-  p {
-    font-size: 18px;
-    color: white;
-  }
-`;
-
 export const LayoutHeader = () => {
   const navigate = useNavigate();
 
@@ -110,43 +52,28 @@ export const LayoutHeader = () => {
   ];
 
   return (
-    <HeroSection>
-      <StyledHeader>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src="../../../public/images/lucy.svg"
-            alt="logo"
-            width="70px"
-            height="70px"
-            onClick={() => navigate('/')}
-          />
+    <Layout.Header style={{ display: 'flex', alignItems: 'center' }}>
+      <img
+        src="../../../public/images/lucy.svg"
+        alt="logo"
+        width="70px"
+        height="70px"
+        onClick={() => navigate('/')}
+      />
 
-          <Menu
-            mode="horizontal"
-            items={items}
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              background: 'transparent',
-              borderBottom: 'none',
-            }}
-          />
+      <Menu
+        mode="horizontal"
+        theme="light"
+        items={items}
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          background: 'transparent',
+          borderBottom: 'none',
+        }}
+      />
 
-          <StyledButton>Đăng nhập</StyledButton>
-        </div>
-      </StyledHeader>
-
-      <HeroContent>
-        <h1>STARFISH SAIGON HOTEL</h1>
-      </HeroContent>
-
-      <BookingForm>
-        <DatePicker placeholder="ngày đến" />
-        <DatePicker placeholder="ngày về" />
-        <InputNumber placeholder="người lớn" min={1} />
-        <InputNumber placeholder="trẻ em" min={0} />
-        <Button type="primary">BOOKING</Button>
-      </BookingForm>
-    </HeroSection>
+      <StyledButton>Đăng nhập</StyledButton>
+    </Layout.Header>
   );
 };

@@ -1,8 +1,6 @@
 import { Card, Col, Image, Layout, Row, Typography } from 'antd';
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons';
 
-import LayoutFooter from '../../components/MainLayout/footer';
-import { LayoutHeader } from '../../components/MainLayout/layoutHeader.tsx';
 import React from 'react';
 
 const { Content } = Layout;
@@ -29,7 +27,6 @@ const imageStyle: React.CSSProperties = {
 const AboutUs: React.FC = () => {
   return (
     <Layout>
-      <LayoutHeader />
       <Content style={{ padding: '0 50px', backgroundColor: '#f0f2f5' }}>
         <div
           style={{
@@ -144,7 +141,6 @@ const AboutUs: React.FC = () => {
           </Row>
         </div>
       </Content>
-      <LayoutFooter />
     </Layout>
   );
 };

@@ -12,7 +12,6 @@ const { Text } = Typography;
 
 const LayoutFooter = () => {
   return (
-    // #0077b5
     <Footer
       style={{
         backgroundColor: '#663366',

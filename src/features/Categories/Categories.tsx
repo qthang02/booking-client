@@ -1,7 +1,5 @@
 import { Button, Card, Col, DatePicker, Drawer, Form, Input, InputNumber, message, Row, Select } from 'antd';
 
-import LayoutFooter from '../../components/MainLayout/footer';
-import { LayoutHeader } from '../../components/MainLayout/layoutHeader.tsx';
 import React, { useState } from 'react';
 import { useListCategories } from '../../query/catgories';
 import { Categories } from '../../model/categories.ts';
@@ -108,7 +106,6 @@ const RoomList: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <LayoutHeader />
       <div style={{ background: '#ECECEC', padding: '30px' }}>
         <Row gutter={[16, 16]}>
           {listCategories.data?.categories.map((category) => (
@@ -179,7 +176,6 @@ const RoomList: React.FC = () => {
           </Form>
         </Drawer>
       </div>
-      <LayoutFooter />
     </div>
   );
 };

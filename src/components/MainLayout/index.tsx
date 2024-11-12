@@ -1,9 +1,9 @@
 import { Layout } from 'antd';
 
 
-import LayoutFooter from './footer.tsx';
 import { LayoutHeader } from './layoutHeader.tsx';
 import { Content } from 'antd/lib/layout/layout';
+import { Outlet } from 'react-router-dom';
 
 
 export const MainLayout = () => {
@@ -12,9 +12,8 @@ export const MainLayout = () => {
     <Layout>
       <LayoutHeader />
       <Content>
-
+        <Outlet />
       </Content>
-      <LayoutFooter />
     </Layout>
   );
 };
