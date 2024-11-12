@@ -7,12 +7,11 @@ import {
   TwitterOutlined,
 } from '@ant-design/icons';
 
-const { Footer } = Layout;
 const { Text } = Typography;
 
 const LayoutFooter = () => {
   return (
-    <Footer
+    <Layout
       style={{
         backgroundColor: '#663366',
         color: 'white',
@@ -44,7 +43,7 @@ const LayoutFooter = () => {
           </Space>
         </Col>
       </Row>
-    </Footer>
+    </Layout>
   );
 };
 

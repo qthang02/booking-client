@@ -2,8 +2,7 @@ import { Button, Card, Descriptions, Modal, Spin, notification } from 'antd';
 import React, { useState } from 'react';
 
 import { EditOutlined } from '@ant-design/icons';
-import LayoutFooter from '../../components/MainLayout/footer';
-import { LayoutHeader } from '../../components/MainLayout/layoutHeader.tsx';
+import LayoutFooter from '../../components/MainLayout/LayoutFooter.tsx';
 import { User } from '../../model/profile.ts';
 import UserProfileForm from './ProfileUserForm';
 import { useGetProfile } from '../../query/profile.ts';
@@ -36,7 +35,6 @@ const UserProfile: React.FC = () => {
 
   return (
     <div>
-      <LayoutHeader />
       <Card
         title="Thông tin người dùng"
         bordered={false}

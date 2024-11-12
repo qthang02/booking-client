@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import AboutUs from '../features/About us/Aboutus';
 import Login from '../features/login/login';
-import { MainLayout } from '../components/MainLayout';
+import { MainLayout } from '../components/MainLayout/Index.tsx';
 import Payment from '../features/payment/payment';
 import Register from '../features/register/register';
 import RoomList from '../features/Categories/Categories';

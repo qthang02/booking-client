@@ -1,8 +1,6 @@
 import { Button, Card, Divider, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 
-import LayoutFooter from '../../components/MainLayout/footer';
-import { LayoutHeader } from '../../components/MainLayout/layoutHeader.tsx';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -79,7 +77,6 @@ const Payment: React.FC = () => {
 
   return (
     <div>
-      <LayoutHeader />
       <div
         style={{
           display: 'flex',
@@ -127,7 +124,6 @@ const Payment: React.FC = () => {
           </Button>
         </div>
       </div>
-      <LayoutFooter />
     </div>
   );
 };

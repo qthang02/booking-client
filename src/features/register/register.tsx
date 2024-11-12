@@ -1,7 +1,5 @@
 import { Button, Form, Input, Select, Space } from 'antd';
 
-import LayoutFooter from '../../components/MainLayout/footer';
-import { LayoutHeader } from '../../components/MainLayout/layoutHeader.tsx';
 import React from 'react';
 import { RegisterRequset } from '../../model/authen';
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +25,6 @@ const Register: React.FC = () => {
 
   return (
     <div>
-      <LayoutHeader />
       <div className="flex flex-col min-h-screen">
         <div>
           <h1
@@ -158,7 +155,6 @@ const Register: React.FC = () => {
           </Space>
         </div>
       </div>
-      <LayoutFooter />
     </div>
   );
 };

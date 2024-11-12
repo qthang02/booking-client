@@ -1,7 +1,5 @@
 import { Button, Form, Input, Space } from 'antd';
 
-import LayoutFooter from '../../components/MainLayout/footer';
-import { LayoutHeader } from '../../components/MainLayout/layoutHeader.tsx';
 import { LoginRequest } from '../../model/authen';
 import React from 'react';
 import { useLogin } from '../../query/authen';
@@ -16,7 +14,6 @@ const Login: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <LayoutHeader />
       <h1
         style={{
           textAlign: 'center',
@@ -78,7 +75,6 @@ const Login: React.FC = () => {
           </Form>
         </Space>
       </div>
-      <LayoutFooter />
     </div>
   );
 };

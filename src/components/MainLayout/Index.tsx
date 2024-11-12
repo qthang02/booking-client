@@ -1,7 +1,6 @@
 import { Layout } from 'antd';
 
-
-import { LayoutHeader } from './layoutHeader.tsx';
+import { LayoutHeader } from './LayoutHeader.tsx';
 import { Content } from 'antd/lib/layout/layout';
 import { Outlet } from 'react-router-dom';
 
